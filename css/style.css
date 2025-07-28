@@ -1,0 +1,127 @@
+/* Roboto font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/* Bitcount font */
+@import url('https://fonts.googleapis.com/css2?family=Bitcount:wght@100..900&display=swap');
+
+/* Global Styles */
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    scroll-behavior: smooth;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    background-color: rgba(50, 50, 50, 0.8);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+.logo img {
+    margin-top: 0; margin-bottom: 0; margin-left: 75px; margin-right: 25px;
+    width: 40px;
+}
+.logo h3 {
+    margin-left: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 28px;
+    font-family: 'Bitcount';
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin-top: 0; margin-bottom: 0; margin-left: 0; margin-right: 50px;
+}
+.nav-links a {
+    display: block;
+    padding: 30px 16px;
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    font-family: 'Bitcount';
+    text-transform: uppercase;
+    transition: all ease-in-out 100ms;
+}
+.nav-links a:hover {
+    color: gold;
+}
+.nav-links .nav-cta-button {
+    padding: 10px 18px;
+    margin-left: 16px;
+    border: gold solid 2px;
+    border-radius: 50px;
+}
+.nav-links .nav-cta-button:hover {
+    color: white;
+    background-color: gold;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    margin-top: 0; margin-bottom: 0; margin-left: 0; margin-right: 15px;
+    width: 34px;
+}
+.hamburger .bar {
+    flex-basis: 100%;
+    height: 4px;
+    background-color: white;
+    margin: 3px;
+}
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    nav {
+        flex-wrap: wrap;
+    }
+
+    .hamburger {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        height: 80px;
+    }
+    .logo img {
+        margin-top: 0; margin-bottom: 0; margin-left: 0; margin-right: 10px;
+    }
+
+    .nav-links {
+        display: none;
+        flex-basis: 100%;
+        flex-wrap: wrap;
+    } 
+    .nav-links li {
+        flex-basis: 100%;
+    }
+    .nav-links a {
+        text-align: center;
+        font-size: 28px;
+    }
+    .nav-links a:hover {
+        color: gold;
+    }
+    .nav-links .nav-cta-button {
+    padding: 30px 16px;
+    margin-left: 0;
+    border: gold solid 2px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    }
+    .nav-links .nav-cta-button:hover {
+    background-color: gold;
+    }
+}
