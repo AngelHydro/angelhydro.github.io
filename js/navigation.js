@@ -3,12 +3,13 @@ const navLinks = document.querySelector('.nav-links');
 let menuOpen = false;
 
 hamburger.addEventListener('click', () => {
-    if (menuOpen == false) {
-        navLinks.style.display = "block";
+    if (!menuOpen) {
+        navLinks.classList.add('open');
+        document.body.classList.add('no-scroll'); // Empêche le scroll
         menuOpen = true;
-    }
-    else if (menuOpen == true) {
-        navLinks.style.display = "none";
+    } else {
+        navLinks.classList.remove('open');
+        document.body.classList.remove('no-scroll'); // Rétablit le scroll
         menuOpen = false;
     }
 });
