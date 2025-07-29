@@ -3,7 +3,8 @@
 /* Bitcount font */
 @import url('https://fonts.googleapis.com/css2?family=Bitcount:wght@100..900&display=swap');
 
-/* Global Styles */
+/* GLOBAL STYLES */
+
 html, body {
     margin: 0;
     padding: 0;
@@ -11,6 +12,23 @@ html, body {
     scroll-behavior: smooth;
 }
 
+h1 {
+    font-family: 'Bitcount';
+    font-size: 50px;
+    font-weight: 400;
+    color: gold;
+    text-decoration: none;
+}
+h2 {
+    font-family: 'Bitcount';
+    font-size: 40px;
+    font-weight: 400;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Header */
 nav {
     position: sticky;
     top: 0;
@@ -34,6 +52,7 @@ nav {
     color: white;
     text-decoration: none;
     font-size: 28px;
+    font-weight: 400;
     font-family: 'Bitcount';
 }
 
@@ -49,9 +68,10 @@ nav {
     color: white;
     text-decoration: none;
     font-size: 25px;
+    font-weight: 400;
     font-family: 'Bitcount';
     text-transform: uppercase;
-    transition: all ease-in-out 100ms;
+    transition: all ease-in-out 0.3s;
 }
 .nav-links a:hover {
     color: gold;
@@ -80,9 +100,82 @@ nav {
     margin: 3px;
 }
 
+/* Home */
+.home-content {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.home-content img {
+    margin-top: 0; margin-bottom: 0; margin-left: 100px; margin-right: 50px;
+}
+.home-content h1 {
+    margin-top: 0; margin-bottom: 0; margin-left: 50px; margin-right: 75px;
+}
 
-/* Responsive Styles */
+/* A propos */
+.about-content {
+    width: 100%;
+    height: 100vh;
+    background-color: gray;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+
+/* Portfolio */
+.portfolio-content {
+    width: 100%;
+    height: 100vh;
+    background-color: goldenrod;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+
+/* Contact */
+.contact-content {
+    width: 100%;
+    height: 100vh;
+    background-color: gray;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+
+/* Blog */
+.blog-content {
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+
+/* Footer */
+
+
+/* RESPONSIVE STYLES */
+
 @media (max-width: 768px) {
+    /* Header */
     nav {
         flex-wrap: wrap;
     }
@@ -124,4 +217,34 @@ nav {
     .nav-links .nav-cta-button:hover {
     background-color: gold;
     }
+
+    /* Home */
+    .home-content {
+        flex-direction: column;
+        height: 95vh;
+    }
+    .home-content img {
+        display: none;
+    }
+    .home-content h1 {
+        margin-top: 0; margin-bottom: 0; margin-left: 25px; margin-right: 25px;
+        font-size: 40px;
+        text-align: center;
+        justify-content: center;
+    }
+
+
+    /* A propos */
+
+
+    /* Portfolio */
+
+
+    /* Contact */
+
+
+    /* Blog */
+
+
+    /* Footer */
 }
