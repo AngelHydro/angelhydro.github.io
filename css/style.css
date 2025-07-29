@@ -55,6 +55,14 @@ nav {
     font-weight: 400;
     font-family: 'Bitcount';
 }
+.logo h3 a {
+    color: white;
+    text-decoration: none;
+    transition: all ease-in-out 0.3s;
+}
+.logo h3 a:hover {
+    color: gold;
+}
 
 .nav-links {
     display: flex;
@@ -103,7 +111,7 @@ nav {
 /* Home */
 .home-content {
     width: 100%;
-    height: 90vh;
+    height: 100vh;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -120,7 +128,7 @@ nav {
 /* A propos */
 .about-content {
     width: 100%;
-    height: 100vh;
+    height: 110vh;
     background-color: gray;
     display: flex;
     flex-direction: row;
@@ -133,7 +141,7 @@ nav {
 /* Portfolio */
 .portfolio-content {
     width: 100%;
-    height: 100vh;
+    height: 110vh;
     background-color: goldenrod;
     display: flex;
     flex-direction: row;
@@ -146,7 +154,7 @@ nav {
 /* Contact */
 .contact-content {
     width: 100%;
-    height: 100vh;
+    height: 110vh;
     background-color: gray;
     display: flex;
     flex-direction: row;
@@ -159,7 +167,7 @@ nav {
 /* Blog */
 .blog-content {
     width: 100%;
-    height: 100vh;
+    height: 110vh;
     background-color: black;
     display: flex;
     flex-direction: row;
