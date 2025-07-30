@@ -21,18 +21,41 @@ h1 {
 }
 h2 {
     font-family: 'Bitcount';
-    font-size: 40px;
+    font-size: 45px;
     font-weight: 400;
     color: white;
     text-decoration: none;
+    text-transform: uppercase; /* Met en majuscule les lettres */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0; /* Retire les marges par défaut */
+    padding-top: 50px; /* Ajoute un espace au-dessus du titre */
+    padding-bottom: 20px; /* Ajoute un espace en dessous du titre */
+}
+p {
+    font-family: 'Roboto';
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    line-height: 1.6; /* Améliore la lisibilité */
+    margin: 0; /* Retire les marges par défaut */
+}
+a {
+    color: gold;
+    text-decoration: none;
+    transition: all ease-in-out 0.3s; /* transition pour le hover */
+}
+a:hover {
+    color: white;
 }
 
 /* Header */
 nav {
-    position: sticky;
+    position: sticky; /* reste en haut de la page lors du scroll */
     top: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* espace entre logo et liens */
     align-items: center;
     padding: 0 15px;
     background-color: rgba(50, 50, 50, 0.95);
@@ -57,7 +80,7 @@ nav {
 .logo h3 a {
     color: white;
     text-decoration: none;
-    transition: all ease-in-out 0.3s;
+    transition: all ease-in-out 0.3s; /* transition pour le hover */
 }
 .logo h3 a:hover {
     color: gold;
@@ -70,7 +93,7 @@ nav {
     margin-top: 0; margin-bottom: 0; margin-left: 0; margin-right: 50px;
 }
 .nav-links a {
-    display: block;
+    display: block; /* pour que le lien prenne tout l'espace du li */
     padding: 30px 16px;
     color: white;
     text-decoration: none;
@@ -78,7 +101,7 @@ nav {
     font-weight: 400;
     font-family: 'Bitcount';
     text-transform: uppercase;
-    transition: all ease-in-out 0.3s;
+    transition: all ease-in-out 0.3s; /* transition pour le hover */
 }
 .nav-links a:hover {
     color: gold;
@@ -95,13 +118,13 @@ nav {
 }
 
 .hamburger {
-    display: none;
-    cursor: pointer;
+    display: none; /* caché par défaut, visible en responsive */
+    cursor: pointer; /* curseur pointeur pour indiquer que c'est cliquable */
     margin-top: 0; margin-bottom: 0; margin-left: 0; margin-right: 15px;
     width: 34px;
 }
 .hamburger .bar {
-    flex-basis: 100%;
+    flex-basis: 100%; /* chaque barre prend toute la largeur */
     height: 4px;
     background-color: white;
     margin: 3px;
@@ -112,7 +135,7 @@ nav {
     width: 100%;
     height: 100vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* alignement horizontal */
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -129,25 +152,44 @@ nav {
 }
 
 /* A propos */
-.about-content {
+.about {
     width: 100%;
-    height: 110vh;
+    height: auto; /* hauteur automatique pour s'adapter au contenu */
     background-color: gray;
+    padding-top: 75px; /* espace au-dessus du contenu */
+}
+.about p {
+    text-align: center;
+    padding-top: 25px; padding-bottom: 25px; padding-left: 50px; padding-right: 50px; /* espace latéral */
+}
+.about-content {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* alignement horizontal */
     align-items: center;
     justify-content: center;
     text-align: center;
+    padding-left: 50px; padding-right: 50px; /* espace latéral */
+}
+.about-content img {
+    width: 30%;
+    height: auto;
+    border-radius: 10px; /* arrondit les coins de l'image */
+}
+.about-content p {
+    padding-left: 0;
 }
 
 
 /* Portfolio */
-.portfolio-content {
+.portfolio {
     width: 100%;
     height: 110vh;
     background-color: goldenrod;
+    padding-top: 75px; /* espace au-dessus du contenu */
+}
+.portfolio-content {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* alignement horizontal */
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -155,12 +197,15 @@ nav {
 
 
 /* Contact */
-.contact-content {
+.contact {
     width: 100%;
     height: 110vh;
     background-color: gray;
+    padding-top: 75px; /* espace au-dessus du contenu */
+}
+.contact-content {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* alignement horizontal */
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -168,12 +213,15 @@ nav {
 
 
 /* Blog */
-.blog-content {
+.blog {
     width: 100%;
     height: 110vh;
     background-color: black;
+    padding-top: 75px; /* espace au-dessus du contenu */
+}
+.blog-content {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* alignement horizontal */
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -186,13 +234,16 @@ nav {
 /* RESPONSIVE STYLES */
 
 @media (max-width: 768px) {
+    p {
+        padding-left: 0; padding-right: 0; /* retire l'espace latéral */
+    }
     /* Header */
     nav {
-        flex-wrap: wrap;
-        position: fixed;
+        flex-wrap: wrap; /* permet aux éléments de passer à la ligne */
+        position: fixed; /* reste en haut de la page lors du scroll */
         top: 0;
         left: 0;
-        width: 100vw;
+        width: 100vw; /* prend toute la largeur de l'écran */
         z-index: 2000; /* plus haut que .nav-links */
         background-color: rgba(50, 50, 50, 0.95);
     }
@@ -208,8 +259,8 @@ nav {
 
     .hamburger {
         display: flex;
-        flex-wrap: wrap;
-        position: fixed;
+        flex-wrap: wrap; /* permet aux barres de passer à la ligne si nécessaire */
+        position: fixed; /* reste en haut de la page lors du scroll */
         top: 25px;
         right: 25px;
         z-index: 2100; /* au-dessus du header */
@@ -221,30 +272,29 @@ nav {
         height: 100vh;
     }
     .nav-links {
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.4s cubic-bezier(.4,0,.2,1);
+        opacity: 0; /* caché par défaut */
+        pointer-events: none; /* empêche les interactions */
+        transition: opacity 0.4s cubic-bezier(.4,0,.2,1); /* transition pour l'ouverture */
         position: fixed;
         top: 80px; /* sous le header */
         left: 0;
         width: 100vw;
         height: calc(100vh - 80px); /* prend tout sauf le header */
         background: rgba(50, 50, 50, 0.95);
-        flex-direction: column;
+        flex-direction: column; /* alignement vertical */
         align-items: center;
-        justify-content: flex-start;
-        z-index: 1000;
+        justify-content: flex-start; /* aligne les éléments en haut */
+        z-index: 1000; /* en-dessous du header */
         padding: 40px 0 0 0;
         margin: 0;
     }
-
     .nav-links.open {
-        opacity: 1;
-        pointer-events: auto;
+        opacity: 1; /* visible lorsque le menu est ouvert */
+        pointer-events: auto; /* permet les interactions */
     }
 
     .nav-links li {
-        flex-basis: unset;
+        flex-basis: unset; /* réinitialise la largeur */
         width: 100%;
         margin: 20px 0;
     }
@@ -271,10 +321,10 @@ nav {
 
     /* Home */
     .home-content {
-        flex-direction: column;
+        flex-direction: column; /* alignement vertical */
     }
     .home-content img {
-        display: none;
+        display: none; /* caché en responsive */
     }
     .home-content h1 {
         margin-top: 0; margin-bottom: 0; margin-left: 25px; margin-right: 25px;
@@ -285,6 +335,16 @@ nav {
 
 
     /* A propos */
+    .about p {
+        padding-left: 50px; padding-right: 50px; /* espace latéral */
+    }
+    .about-content {
+        flex-direction: column; /* alignement vertical */
+        padding-left: 0; padding-right: 0; /* retire l'espace latéral */
+    }
+    .about-content img {
+        width: 75%; /* réduit la taille de l'image */
+    }
 
 
     /* Portfolio */
