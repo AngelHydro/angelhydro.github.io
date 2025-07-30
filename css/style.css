@@ -178,6 +178,10 @@ nav {
 .about-content p {
     padding-left: 0;
 }
+.moi {
+    display: flex;
+    flex-direction: column; /* alignement vertical */
+}
 
 
 /* Portfolio */
