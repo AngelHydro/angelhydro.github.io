@@ -33,6 +33,19 @@ h2 {
     padding-top: 50px; /* Ajoute un espace au-dessus du titre */
     padding-bottom: 20px; /* Ajoute un espace en dessous du titre */
 }
+h4 {
+    font-family: 'Bitcount';
+    font-size: 30px;
+    font-weight: 400;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase; /* Met en majuscule les lettres */
+    display: flex;
+    align-items: center;
+    margin: 0; /* Retire les marges par défaut */
+    padding-top: 50px; /* Ajoute un espace au-dessus du titre */
+    padding-bottom: 20px; /* Ajoute un espace en dessous du titre */
+}
 p {
     font-family: 'Roboto';
     font-size: 20px;
@@ -41,7 +54,17 @@ p {
     line-height: 1.6; /* Améliore la lisibilité */
     margin: 0; /* Retire les marges par défaut */
 }
+li {
+    font-family: 'Roboto';
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    line-height: 1.6; /* Améliore la lisibilité */
+    margin: 0; /* Retire les marges par défaut */
+}
 a {
+    font-family: 'Roboto';
+    font-size: 20px;
     color: gold;
     text-decoration: none;
     transition: all ease-in-out 0.3s; /* transition pour le hover */
@@ -78,6 +101,9 @@ nav {
     font-family: 'Bitcount';
 }
 .logo h3 a {
+    font-family: 'Bitcount';
+    font-size: 28px;
+    font-weight: 400;
     color: white;
     text-decoration: none;
     transition: all ease-in-out 0.3s; /* transition pour le hover */
@@ -233,7 +259,31 @@ nav {
 
 
 /* Footer */
+footer {
+    align-items: center;
+    text-align: center;
+    padding: 15px 15px;
+    gap: 10px; /* espace entre les éléments */
+    background-color: rgba(50, 50, 50, 0.95);
+}
+footer span {
+    font-family: 'Roboto';
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    line-height: 1.6; /* Améliore la lisibilité */
+    margin-top: 0; margin-bottom: 0; margin-left: 10px; margin-right: 10px;/* Marges horizontales */
+}
 
+
+/* ml.html */
+main {
+    padding-left: 25px; padding-right: 25px; /* espace latéral */
+}
+.ml {
+    padding-top: 100px; /* espace au-dessus du titre */
+    padding-bottom: 20px; /* espace en dessous du titre */
+}
 
 /* RESPONSIVE STYLES */
 
@@ -361,5 +411,10 @@ nav {
 
 
     /* Footer */
-
+    footer {
+        padding: 15px 5px; /* réduit l'espace latéral */
+    }
+    footer span:nth-child(2), footer span:nth-child(3), footer span:nth-child(4), footer span:nth-child(5), footer span:nth-child(6),footer span:nth-child(7) {
+        display: none; /* caché en responsive */
+    }
 }
