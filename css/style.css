@@ -33,6 +33,16 @@ h2 {
     padding-top: 50px; /* Ajoute un espace au-dessus du titre */
     padding-bottom: 20px; /* Ajoute un espace en dessous du titre */
 }
+h3 {
+    font-family: 'Bitcount';
+    font-size: 35px;
+    font-weight: 400;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase; /* Met en majuscule les lettres */
+    display: flex;
+    margin: 0; /* Retire les marges par défaut */
+}
 h4 {
     font-family: 'Bitcount';
     font-size: 30px;
@@ -82,6 +92,7 @@ nav {
     align-items: center;
     padding: 0 15px;
     background-color: rgba(50, 50, 50, 0.95);
+    z-index: 1000; /* Ajoute cette ligne pour que le header soit au-dessus de tout */
 }
 
 .logo {
@@ -225,17 +236,192 @@ nav {
 
 /* Portfolio */
 .portfolio {
-    width: 100%;
+    width: auto;
     height: 110vh;
-    background-color: goldenrod;
-    padding-top: 75px; /* espace au-dessus du contenu */
+    background: goldenrod;
+    padding-top: 75px;
+    padding-bottom: 20px; /* Ajoute un padding-bottom pour laisser de l'espace aux filtres */
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
 }
+
 .portfolio-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: calc(100vh - 95px); /* Ajuste la hauteur pour tenir compte du padding-bottom */
     display: flex;
-    flex-direction: row; /* alignement horizontal */
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+    /* Supprime flex: 1 pour que la grille garde sa taille naturelle */
+}
+
+.project-card {
+    background: #EFD068;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 2px solid #B8861B;
+    backdrop-filter: blur(10px);
+    z-index: 1; /* Ajoute cette ligne pour s'assurer que les cartes restent en dessous du header */
+}
+.project-card:hover {
+    background: #EBC85C;
+    color: black;
+    transform: translateY(-10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    border-color: #B8861B;
+}
+.project-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+.project-card:hover .project-image img {
+    transform: scale(1.1);
+}
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.project-link {
+    background:  #EFD068;
+    color:  #2B2B2B;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid #B8861B;
+}
+.project-link:hover {
+    background: #EBC85C;
+    color: black;
+    border-color: #B8861B;
+    transform: scale(1.05);
+}
+
+.project-info {
+    padding: 25px;
+}
+.project-info h3 {
+    font-family: 'Bitcount';
+    font-size: 24px;
+    color: #2B2B2B;
+    margin: 0 0 15px 0;
+    text-align: left;
+}
+.project-info p {
+    color: #2B2B2B;
+    margin-bottom: 20px;
+    text-align: left;
+    font-size: 16px;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background: #C89B3C;
+    color: #FFFFFF;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid #8C6D1F;
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background: #D4A84A;
+    color: white;
+    border-color: #B8861B;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.portfolio-filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 30px; /* Remplace margin-top: auto par une marge fixe */
+    margin-bottom: 0; /* Supprime la marge du bas */
+}
+
+.filter-btn {
+    background: #E0B94E;
+    color: #2B2B2B;
+    border: 2px solid #B8861B;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Pixelify Sans';
+    font-size: 16px;
+    font-weight: 600;
+    z-index: 1; /* Ajoute cette ligne pour s'assurer que les boutons restent en dessous du header */
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: #C89B3C;
+    color: white;
+    border-color: #8C6D1F;
+    transform: scale(1.05);
+}
+
+/* Animation d'apparition des cartes */
+.project-card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.2s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; }
+.project-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 
@@ -425,6 +611,49 @@ main {
     }
 
     /* Portfolio */
+    .portfolio {
+        height: auto; /* Change la hauteur fixe en hauteur automatique en responsive */
+        min-height: 100vh; /* Garde une hauteur minimale */
+        padding-top: 50px;
+        padding-bottom: 30px;
+        overflow: visible; /* Permet le scroll en responsive */
+    }
+    
+    .portfolio-content {
+        height: auto; /* Hauteur automatique en responsive */
+        justify-content: flex-start; /* Aligne le contenu en haut */
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .project-card {
+        margin: 0 40px;
+    }
+    
+    .project-info {
+        padding: 20px;
+    }
+    .project-info h3 {
+        font-size: 20px;
+    }
+    .project-info p {
+        font-size: 14px;
+    }
+    
+    .portfolio-filters {
+        gap: 10px;
+        margin-top: 20px; /* Marge fixe en responsive */
+        margin-bottom: 20px; /* Marge en bas pour l'espace */
+    }
+    
+    .filter-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
 
 
     /* Contact */
