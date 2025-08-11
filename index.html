@@ -29,31 +29,34 @@
         </ul>
     </nav>
 
+    <!-- Section Home -->
     <div class="home" id="home">
         <div class="home-content">
-            <img src="data/img/logo (1).png" alt="logo">
-            <h1>Angel SANCHEZ <br> <span>Développeur Web</span></h1>
+            <img src="data/img/logo (1).png" alt="logo" class="scale-in">
+            <h1 class="fade-in">Angel SANCHEZ <br> <span>Développeur Web</span></h1>
         </div>
     </div>
 
+    <!-- Section About -->
     <div class="about" id="about">
-        <h2>À propos</h2>
+        <h2 class="fade-in">À propos</h2>
         <div class="about-content">
             <div class="moi">
-                <p>Je m'appelle Angel SANCHEZ, je suis un lycéen passionné par le développement web. J'ai découvert cette passion en seconde, pendant les cours de SNT (bon, un p’tit peu avant, en troisième… j’avoue, j’ai menti 🤭). J’aimais créer de petits programmes en Python qui ne servaient pas forcément à grand-chose, mais qui étaient rigolos.</p>
-                <p>J’ai décidé de continuer dans cette voie, et pour mon stage de seconde, j’ai passé deux semaines dans une agence de développement web (elle s'appelle <i>MagicWeb</i> si ça vous intéresse, vous pouvez jeter un coup d’œil : leurs projets sont hyper qualitatifs, et l’équipe est au top 👍).</p>
+                <p class="slide-up">Je m'appelle Angel SANCHEZ, je suis un lycéen passionné par le développement web. J'ai découvert cette passion en seconde, pendant les cours de SNT (bon, un p’tit peu avant, en troisième… j’avoue, j’ai menti 🤭). J’aimais créer de petits programmes en Python qui ne servaient pas forcément à grand-chose, mais qui étaient rigolos.</p>
+                <p class="slide-up">J’ai décidé de continuer dans cette voie, et pour mon stage de seconde, j’ai passé deux semaines dans une agence de développement web (elle s'appelle <i>MagicWeb</i> si ça vous intéresse, vous pouvez jeter un coup d’œil : leurs projets sont hyper qualitatifs, et l’équipe est au top 👍).</p>
             </div>
-            <img src="data/img/moi1.jpg" alt="moi">
+            <img src="data/img/moi1.jpg" alt="moi" class="scale-in">
         </div>
         <div class="about-content2">
-            <img src="data/img/moi.jpg" alt="encore moi">
-            <p>C’est là que j’ai compris que le développement web, ce n’était pas seulement "faire le site internet des clients" (en fait, si… mais il y a encore beaucoup de travail derrière, et on peut se spécialiser bien plus que simplement en tant que "développeur web"). J’ai donc choisi la spécialité NSI (<strong>N</strong>umérique et <strong>S</strong>ciences de l’<strong>I</strong>nformatique) pour continuer dans cette optique. Pendant l’année, j’ai fait quelques projets en Python, dont <i>les Trophées NSI</i> (on a gagné un prix… mais entre nous, c’était pas mérité 😂). Mais surtout, j’ai continué le développement web en créant un site pour le club couture de mon lycée : <a href="https://clubcouture.github.io/">clubcouture.github.io</a> (jugez pas, j’ai pas les sous pour payer un hébergeur 😅).</p>
+            <img src="data/img/moi.jpg" alt="encore moi" class="scale-in">
+            <p class="slide-up">C’est là que j’ai compris que le développement web, ce n’était pas seulement "faire le site internet des clients" (en fait, si… mais il y a encore beaucoup de travail derrière, et on peut se spécialiser bien plus que simplement en tant que "développeur web"). J’ai donc choisi la spécialité NSI (<strong>N</strong>umérique et <strong>S</strong>ciences de l’<strong>I</strong>nformatique) pour continuer dans cette optique. Pendant l’année, j’ai fait quelques projets en Python, dont <i>les Trophées NSI</i> (on a gagné un prix… mais entre nous, c’était pas mérité 😂). Mais surtout, j’ai continué le développement web en créant un site pour le club couture de mon lycée : <a href="https://clubcouture.github.io/">clubcouture.github.io</a> (jugez pas, j’ai pas les sous pour payer un hébergeur 😅).</p>
         </div>
-            <p>Globalement, mon objectif pour le moment, c’est de me construire un joli portfolio et de consolider mes connaissances en développement web. C’est pour ça que je cherche avant tout à mettre en avant la satisfaction client, tout en continuant à progresser. L’idée, c’est que ça vous plaise en priorité — je préfère ça à me faire un super portfolio rempli de clients pas contents, ce serait un peu contre-productif, donc bof 🙃.</p>
+        <p class="slide-up">Globalement, mon objectif pour le moment, c’est de me construire un joli portfolio et de consolider mes connaissances en développement web. C’est pour ça que je cherche avant tout à mettre en avant la satisfaction client, tout en continuant à progresser. L’idée, c’est que ça vous plaise en priorité — je préfère ça à me faire un super portfolio rempli de clients pas contents, ce serait un peu contre-productif, donc bof 🙃.</p>
     </div>
 
+    <!-- Section Portfolio -->
     <div class="portfolio" id="portfolio">
-        <h2>Portfolio</h2>
+        <h2 class="fade-in">Portfolio</h2>
         <div class="portfolio-content">
             <div class="portfolio-grid">
                 <div class="project-card" data-category="web">
@@ -119,17 +122,83 @@
             </div>
             
             <div class="portfolio-filters">
-                <button class="filter-btn active" data-filter="all">Tous</button>
-                <button class="filter-btn" data-filter="web">Web</button>
-                <button class="filter-btn" data-filter="python">Python</button>
+                <button class="filter-btn active stagger-item" data-filter="all">Tous</button>
+                <button class="filter-btn stagger-item" data-filter="web">Web</button>
+                <button class="filter-btn stagger-item" data-filter="python">Python</button>
             </div>
         </div>
     </div>
 
     <div class="contact" id="contact">
-        <h2>Contact</h2>
+        <h2 class="fade-in">Contact</h2>
         <div class="contact-content">
+            <div class="contact-info">
+                <h3 class="slide-up">Parlons de votre projet !</h3>
+                <p class="slide-up">Vous avez une idée ? Un projet web à réaliser ? N'hésitez pas à me contacter !</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item slide-up">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>sanchez.angel.contact@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item slide-up">
+                        <div class="contact-icon">📱</div>
+                        <div>
+                            <h4>Téléphone</h4>
+                            <p>06 17 60 48 63</p>
+                        </div>
+                    </div>
+                    
+                    <a href="https://www.google.com/maps/place/21700+Nuits-Saint-Georges/@47.1518672,4.9001824,13z/data=!3m1!4b1!4m6!3m5!1s0x47f2902c0368297d:0x409ce34b3144a60!8m2!3d47.1366636!4d4.9488687!16zL20vMDZzMDht?entry=ttu&g_ep=EgoyMDI1MDgwNi4wIKXMDSoASAFQAw%3D%3D">
+                        <div class="contact-item slide-up">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <h4>Localisation</h4>
+                                <p>Nuits-St-Georges, 21700, France</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
             
+            <form class="contact-form slide-up" id="contactForm" action="https://formspree.io/f/XXXXYYYY" method="POST" novalidate>
+                <input type="hidden" name="_subject" value="Nouveau message depuis le portfolio">
+                <input type="text" name="_gotcha" style="display:none">
+                <div class="form-group">
+                    <label for="name">Nom complet *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Sujet *</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Choisissez un sujet</option>
+                        <option value="projet-web">Projet web</option>
+                        <option value="stage">Stage/Alternance</option>
+                        <option value="collaboration">Collaboration</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" rows="6" required placeholder="Décrivez votre projet, vos besoins..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">Envoyer le message</span>
+                    <span class="btn-loading">Envoi en cours...</span>
+                </button>
+            </form>
         </div>
     </div>
 
@@ -156,4 +225,5 @@
 
 </body>
 <script src="js/navigation.js"></script>
+<script src="js/contact.js"></script>
 </html>

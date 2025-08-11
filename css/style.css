@@ -12,6 +12,57 @@ html, body {
     scroll-behavior: smooth;
 }
 
+/* Nouvelles animations au scroll */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-up {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
+.slide-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scale-in {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.6s ease;
+}
+.scale-in.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Animation en cascade pour les éléments de liste */
+.stagger-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+.stagger-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Délais pour l'animation en cascade */
+.stagger-item:nth-child(1) { transition-delay: 0.1s; }
+.stagger-item:nth-child(2) { transition-delay: 0.2s; }
+.stagger-item:nth-child(3) { transition-delay: 0.3s; }
+.stagger-item:nth-child(4) { transition-delay: 0.4s; }
+.stagger-item:nth-child(5) { transition-delay: 0.5s; }
+.stagger-item:nth-child(6) { transition-delay: 0.6s; }
+
+
 h1 {
     font-family: 'Bitcount';
     font-size: 50px;
@@ -31,7 +82,7 @@ h2 {
     align-items: center;
     margin: 0; /* Retire les marges par défaut */
     padding-top: 50px; /* Ajoute un espace au-dessus du titre */
-    padding-bottom: 20px; /* Ajoute un espace en dessous du titre */
+    padding-bottom: 50px; /* Ajoute un espace en dessous du titre */
 }
 h3 {
     font-family: 'Bitcount';
@@ -272,6 +323,24 @@ nav {
     backdrop-filter: blur(10px);
     z-index: 1; /* Ajoute cette ligne pour s'assurer que les cartes restent en dessous du header */
 }
+/* Animation des cartes */
+.project-card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(30px);
+    z-index: 1;
+}
+
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.2s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 .project-card:hover {
     background: #EBC85C;
     color: black;
@@ -365,7 +434,6 @@ nav {
     border: 1px solid #8C6D1F;
     transition: all 0.3s ease;
 }
-
 .tag:hover {
     background: #D4A84A;
     color: white;
@@ -396,7 +464,6 @@ nav {
     font-weight: 600;
     z-index: 1; /* Ajoute cette ligne pour s'assurer que les boutons restent en dessous du header */
 }
-
 .filter-btn:hover,
 .filter-btn.active {
     background: #C89B3C;
@@ -405,39 +472,181 @@ nav {
     transform: scale(1.05);
 }
 
-/* Animation d'apparition des cartes */
-.project-card {
-    animation: fadeInUp 0.6s ease forwards;
-    opacity: 0;
-    transform: translateY(30px);
-}
-
-.project-card:nth-child(1) { animation-delay: 0.1s; }
-.project-card:nth-child(2) { animation-delay: 0.2s; }
-.project-card:nth-child(3) { animation-delay: 0.3s; }
-.project-card:nth-child(4) { animation-delay: 0.4s; }
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 
 /* Contact */
 .contact {
-    width: 100%;
-    height: 110vh;
-    background-color: gray;
-    padding-top: 75px; /* espace au-dessus du contenu */
+    width: auto;
+    min-height: 110vh;
+    background: gray;
+    padding-top: 75px;
+    padding-bottom: 50px;
 }
+
 .contact-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.contact-info h3 {
+    font-family: 'Bitcount';
+    font-size: 32px;
+    color: gold;
+    margin-bottom: 20px;
+    text-align: left;
+}
+.contact-info p {
+    color: white;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+.contact-details {
     display: flex;
-    flex-direction: row; /* alignement horizontal */
+    flex-direction: column;
+    gap: 25px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    transition: all 0.3s ease;
+}
+.contact-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: gold;
+    transform: translateX(10px);
+}
+.contact-item h4 {
+    font-family: 'Bitcount';
+    font-size: 18px;
+    color: gold;
+    padding: 0;
+    margin: 0 0 5px 0;
+}
+.contact-item p {
+    color: white;
+    font-size: 16px;
+    margin: 0;
+}
+.contact-item:last-child {
+    cursor: pointer;
+}
+
+.contact-icon {
+    font-size: 24px;
+    width: 50px;
+    height: 50px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    background: rgba(255, 215, 0, 0.25);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 215, 0, 0.5);
+}
+/* Formulaire */
+.contact-form {
+    background: rgba(255, 255, 255, 0.25);
+    padding: 40px;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+.form-group label {
+    display: block;
+    color: gold;
+    font-family: 'Bitcount';
+    font-size: 16px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    color: white;
+    font-family: 'Pixelify Sans';
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: gold;
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: white;
+}
+.form-group select {
+    color: #fffbe6; /* Texte foncé pour la sélection */
+    background: rgba(255, 255, 255, 0.25); /* Fond clair pour la sélection */
+    border: 2px solid gold;
+    font-family: 'Pixelify Sans';
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.form-group select option {
+    color: black;
+    background: white;
+}
+
+
+.submit-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, gold 0%, goldenrod 100%);
+    color: #2B2B2B;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Bitcount';
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(239, 208, 104, 0.5);
+}
+.submit-btn:active {
+    transform: translateY(-1px);
+}
+
+.btn-loading {
+    display: none;
+}
+.submit-btn.loading .btn-text {
+    display: none;
+}
+.submit-btn.loading .btn-loading {
+    display: block;
 }
 
 
@@ -657,7 +866,28 @@ main {
 
 
     /* Contact */
-
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .contact-info h3, .contact-info p {
+      text-align: center;
+    }
+    
+    .contact-form {
+        padding: 30px 20px;
+    }
+    
+    .contact-item {
+        padding: 15px;
+    }
+    
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
 
     /* Blog */
 

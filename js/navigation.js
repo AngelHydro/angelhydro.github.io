@@ -5,11 +5,11 @@ let menuOpen = false;
 hamburger.addEventListener('click', () => {
     if (!menuOpen) {
         navLinks.classList.add('open');
-        document.body.classList.add('no-scroll'); // Empêche le scroll
+        document.body.classList.add('no-scroll');
         menuOpen = true;
     } else {
         navLinks.classList.remove('open');
-        document.body.classList.remove('no-scroll'); // Rétablit le scroll
+        document.body.classList.remove('no-scroll');
         menuOpen = false;
     }
 });
@@ -20,9 +20,7 @@ const projectCards = document.querySelectorAll('.project-card');
 
 filterButtons.forEach(button => {
     button.addEventListener('click', () => {
-        // Retirer la classe active de tous les boutons
         filterButtons.forEach(btn => btn.classList.remove('active'));
-        // Ajouter la classe active au bouton cliqué
         button.classList.add('active');
         
         const filter = button.getAttribute('data-filter');
@@ -40,21 +38,30 @@ filterButtons.forEach(button => {
     });
 });
 
-// Animation au scroll pour les cartes de projets
+// Système d'animations au scroll UNIFIÉ
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
 };
 
-const observer = new IntersectionObserver((entries) => {
+const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+            entry.target.classList.add('visible');
         }
     });
 }, observerOptions);
 
-// Observer toutes les cartes de projets
-projectCards.forEach(card => {
-    observer.observe(card);
+// Observer tous les éléments avec des classes d'animation
+document.addEventListener('DOMContentLoaded', () => {
+    // Observe les éléments avec nouvelles animations
+    const animatedElements = document.querySelectorAll('.fade-in, .slide-up, .scale-in, .stagger-item');
+    animatedElements.forEach(element => {
+        scrollObserver.observe(element);
+    });
+    
+    // Observe les cartes du portfolio pour les nouvelles animations
+    projectCards.forEach(card => {
+        scrollObserver.observe(card);
+    });
 });
