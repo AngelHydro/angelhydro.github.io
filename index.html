@@ -1,231 +1,222 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Angel SANCHEZ</title>
-    <link rel="icon" href="data/img/logo (1).png" type="icons">
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angel SANCHEZ — Développeur Web</title>
+  <meta name="description" content="Portfolio d'Angel SANCHEZ, lycéen passionné de développement web.">
+  <link rel="icon" href="data/img/logo.png">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
-    <nav role="header">
-        <div class="logo">
-            <img src="data/img/logo (1).png" alt="logo">
-            <h3><a href="#home">Angel SANCHEZ</a></h3>
-        </div>
 
-        <div class="hamburger" role="bouton pour mobile">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-
-        <ul class="nav-links" role="navigation">
-            <li><a href="#about">À propos</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a class="nav-cta-button" href="#blog">Blog</a></li>
-        </ul>
-    </nav>
-
-    <!-- Section Home -->
-    <div class="home" id="home">
-        <div class="home-content">
-            <img src="data/img/logo (1).png" alt="logo" class="scale-in">
-            <h1 class="fade-in">Angel SANCHEZ <br> <span>Développeur Web</span></h1>
-        </div>
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-left">
+      <img class="nav-logo" src="data/img/logo.png" alt="logo">
+      <h3 class="nav-title"><a href="#home">Angel SANCHEZ</a></h3>
     </div>
+    <ul>
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a class="nav-blog" href="#blog">Blog</a></li>
+    </ul>
+  </nav>
 
-    <!-- Section About -->
-    <div class="about" id="about">
-        <h2 class="fade-in">À propos</h2>
-        <div class="about-content">
-            <div class="moi">
-                <p class="slide-up">Je m'appelle Angel SANCHEZ, je suis un lycéen passionné par le développement web. J'ai découvert cette passion en seconde, pendant les cours de SNT (bon, un p’tit peu avant, en troisième… j’avoue, j’ai menti 🤭). J’aimais créer de petits programmes en Python qui ne servaient pas forcément à grand-chose, mais qui étaient rigolos.</p>
-                <p class="slide-up">J’ai décidé de continuer dans cette voie, et pour mon stage de seconde, j’ai passé deux semaines dans une agence de développement web (elle s'appelle <i>MagicWeb</i> si ça vous intéresse, vous pouvez jeter un coup d’œil : leurs projets sont hyper qualitatifs, et l’équipe est au top 👍).</p>
-            </div>
-            <img src="data/img/moi1.jpg" alt="moi" class="scale-in">
-        </div>
-        <div class="about-content2">
-            <img src="data/img/moi.jpg" alt="encore moi" class="scale-in">
-            <p class="slide-up">C’est là que j’ai compris que le développement web, ce n’était pas seulement "faire le site internet des clients" (en fait, si… mais il y a encore beaucoup de travail derrière, et on peut se spécialiser bien plus que simplement en tant que "développeur web"). J’ai donc choisi la spécialité NSI (<strong>N</strong>umérique et <strong>S</strong>ciences de l’<strong>I</strong>nformatique) pour continuer dans cette optique. Pendant l’année, j’ai fait quelques projets en Python, dont <i>les Trophées NSI</i> (on a gagné un prix… mais entre nous, c’était pas mérité 😂). Mais surtout, j’ai continué le développement web en créant un site pour le club couture de mon lycée : <a href="https://clubcouture.github.io/">clubcouture.github.io</a> (jugez pas, j’ai pas les sous pour payer un hébergeur 😅).</p>
-        </div>
-        <p class="slide-up">Globalement, mon objectif pour le moment, c’est de me construire un joli portfolio et de consolider mes connaissances en développement web. C’est pour ça que je cherche avant tout à mettre en avant la satisfaction client, tout en continuant à progresser. L’idée, c’est que ça vous plaise en priorité — je préfère ça à me faire un super portfolio rempli de clients pas contents, ce serait un peu contre-productif, donc bof 🙃.</p>
+  <!-- HOME -->
+  <div id="home">
+    <img src="data/img/logo.png" alt="logo">
+    <h1>Angel SANCHEZ <br> <span>Développeur Web</span></h1>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about">
+    <h2 class="section-title reveal-title" data-reveal>À propos</h2>
+    <div class="about-row">
+      <div class="about-col">
+        <p data-reveal>Je m'appelle Angel SANCHEZ, je suis un lycéen passionné par le développement web. J'ai découvert cette passion en seconde, pendant les cours de SNT (bon, un p'tit peu avant, en troisième… j'avoue, j'ai menti 🤭). J'aimais créer de petits programmes en Python qui ne servaient pas forcément à grand-chose, mais qui étaient rigolos.</p>
+        <p data-reveal>J'ai décidé de continuer dans cette voie, et pour mon stage de seconde, j'ai passé deux semaines dans une agence de développement web (elle s'appelle <i>MagicWeb</i> si ça vous intéresse, vous pouvez jeter un coup d'œil : leurs projets sont hyper qualitatifs, et l'équipe est au top 👍).</p>
+      </div>
+      <img class="about-img" src="data/img/moi2.jpg" alt="moi" data-reveal>
     </div>
-
-    <!-- Section Portfolio -->
-    <div class="portfolio" id="portfolio">
-        <h2 class="fade-in">Portfolio</h2>
-        <div class="portfolio-content">
-            <div class="portfolio-grid">
-                <div class="project-card" data-category="web">
-                    <div class="project-image">
-                        <img src="data/img/club_couture.png" alt="Projet Club Couture">
-                        <div class="project-overlay">
-                            <a href="https://clubcouture.github.io/" target="_blank" class="project-link">
-                                <span>Voir le site</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Club Couture</h3>
-                        <p>Site web pour le club couture de mon lycée, développé avec HTML, CSS et JavaScript.</p>
-                        <div class="project-tags">
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                            <span class="tag">JavaScript</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-category="python">
-                    <div class="project-image">
-                        <img src="data/img/rytmix.png" alt="Trophées NSI">
-                        <div class="project-overlay">
-                            <a href="#" class="project-link">
-                                <span>Voir le projet</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Trophées NSI</h3>
-                        <p>Projet Python réalisé en classe de NSI, lauréat d'un prix aux Trophées NSI.</p>
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">NSI</span>
-                            <span class="tag">Algorithmes</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-category="web">
-                    <div class="project-image">
-                        <img src="data/img/logo (1).png" alt="Portfolio Personnel">
-                        <div class="project-overlay">
-                            <a href="#" class="project-link">
-                                <span>Voir le code</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Portfolio Personnel</h3>
-                        <p>Ce site portfolio développé avec une approche moderne et responsive.</p>
-                        <div class="project-tags">
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                            <span class="tag">JavaScript</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            
-            <div class="portfolio-filters">
-                <button class="filter-btn active stagger-item" data-filter="all">Tous</button>
-                <button class="filter-btn stagger-item" data-filter="web">Web</button>
-                <button class="filter-btn stagger-item" data-filter="python">Python</button>
-            </div>
-        </div>
+    <div class="about-row">
+      <img class="about-img small" src="data/img/moi2.jpg" alt="encore moi" data-reveal>
+      <p data-reveal>C'est là que j'ai compris que le développement web, ce n'était pas seulement "faire le site internet des clients" (en fait, si… mais il y a encore beaucoup de travail derrière, et on peut se spécialiser bien plus que simplement en tant que "développeur web"). J'ai donc choisi la spécialité NSI (<strong>N</strong>umérique et <strong>S</strong>ciences de l'<strong>I</strong>nformatique) pour continuer dans cette optique. Pendant l'année, j'ai fait quelques projets en Python, dont <i>les Trophées NSI</i> (on a gagné un prix… mais entre nous, c'était pas mérité 😂). Mais surtout, j'ai continué le développement web en créant un site pour le club couture de mon lycée : <a href="https://clubcouture.github.io/">clubcouture.github.io</a> (jugez pas, j'ai pas les sous pour payer un hébergeur 😅).</p>
     </div>
+    <p class="about-text" data-reveal>Globalement, mon objectif pour le moment, c'est de me construire un joli portfolio et de consolider mes connaissances en développement web. C'est pour ça que je cherche avant tout à mettre en avant la satisfaction client, tout en continuant à progresser. L'idée, c'est que ça vous plaise en priorité — je préfère ça à me faire un super portfolio rempli de clients pas contents, ce serait un peu contre-productif, donc bof 🙃.</p>
+    <div class="about-spacer"></div>
+  </div>
 
-    <div class="contact" id="contact">
-        <h2 class="fade-in">Contact</h2>
-        <div class="contact-content">
-            <div class="contact-info">
-                <h3 class="slide-up">Parlons de votre projet !</h3>
-                <p class="slide-up">Vous avez une idée ? Un projet web à réaliser ? N'hésitez pas à me contacter !</p>
-                
-                <div class="contact-details">
-                    <div class="contact-item slide-up">
-                        <div class="contact-icon">📧</div>
-                        <div>
-                            <h4>Email</h4>
-                            <p></p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item slide-up">
-                        <div class="contact-icon">📱</div>
-                        <div>
-                            <h4>Téléphone</h4>
-                            <p></p>
-                        </div>
-                    </div>
-                    
-                    <a href="https://www.google.com/maps/place/21700+Nuits-Saint-Georges/@47.1518672,4.9001824,13z/data=!3m1!4b1!4m6!3m5!1s0x47f2902c0368297d:0x409ce34b3144a60!8m2!3d47.1366636!4d4.9488687!16zL20vMDZzMDht?entry=ttu&g_ep=EgoyMDI1MDgwNi4wIKXMDSoASAFQAw%3D%3D">
-                        <div class="contact-item slide-up">
-                            <div class="contact-icon">📍</div>
-                            <div>
-                                <h4>Localisation</h4>
-                                <p>France</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            
-            <form class="contact-form slide-up" id="contactForm" action="" method="POST" novalidate>
-                <input type="hidden" name="_subject" value="Nouveau message depuis le portfolio">
-                <input type="text" name="_gotcha" style="display:none">
-                <div class="form-group">
-                    <label for="name">Nom complet *</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="subject">Sujet *</label>
-                    <select id="subject" name="subject" required>
-                        <option value="">Choisissez un sujet</option>
-                        <option value="projet-web">Projet web</option>
-                        <option value="stage">Stage/Alternance</option>
-                        <option value="collaboration">Collaboration</option>
-                        <option value="autre">Autre</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Message *</label>
-                    <textarea id="message" name="message" rows="6" required placeholder="Décrivez votre projet, vos besoins..."></textarea>
-                </div>
-                
-                <button type="submit" class="submit-btn">
-                    <span class="btn-text">Envoyer le message</span>
-                    <span class="btn-loading">Envoi en cours...</span>
-                </button>
-            </form>
-        </div>
+  <!-- PORTFOLIO -->
+  <div id="portfolio">
+    <h2 class="section-title reveal-title" data-reveal>Portfolio</h2>
+    <div class="container">
+      <div class="grid" id="projects-grid"><!-- généré par JS --></div>
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">Tous</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+        <button class="filter-btn" data-filter="python">Python</button>
+      </div>
     </div>
+  </div>
 
-    <div class="blog" id="blog">
-        <h2>Blog</h2>
-        <div class="blog-content">
-            
+  <!-- CONTACT -->
+  <div id="contact">
+    <h2 class="section-title reveal-title" data-reveal>Contact</h2>
+    <div class="contact-grid">
+      <div>
+        <h3 data-reveal>Parlons de votre projet !</h3>
+        <p class="contact-intro" data-reveal>Vous avez une idée ? Un projet web à réaliser ? N'hésitez pas à me contacter !</p>
+        <div class="contact-list">
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div><h4>Email</h4><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d1a2b0bfb2b9b4abffb0bfb6b4bdffb2bebfa5b0b2a591b6bcb0b8bdffb2bebc">[email&#160;protected]</a></p></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div><h4>Téléphone</h4><p>06 17 60 48 63</p></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div><h4>Localisation</h4><p>France</p></div>
+          </div>
         </div>
+      </div>
+      <form class="contact-form" data-reveal id="contact-form">
+        <div class="field">
+          <label>Nom complet *</label>
+          <input type="text" required>
+        </div>
+        <div class="field">
+          <label>Email *</label>
+          <input type="email" required>
+        </div>
+        <div class="field">
+          <label>Sujet *</label>
+          <select required>
+            <option value="">Choisissez un sujet</option>
+            <option value="projet-web">Projet web</option>
+            <option value="stage">Stage/Alternance</option>
+            <option value="collaboration">Collaboration</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Message *</label>
+          <textarea rows="6" placeholder="Décrivez votre projet, vos besoins..." required></textarea>
+        </div>
+        <button type="submit" class="contact-submit">Envoyer le message</button>
+      </form>
     </div>
+  </div>
 
-    <footer>
-        <div class="footer-content">
-            <span>Angel SANCHEZ</span>
-            <span> - </span>
-            <span>Développeur Web</span>
-            <span> - </span>
-            <span>06 17 60 48 63</span>
-            <span> - </span>
-            <span>sanchez.angel.contact@gmail.com</span>
-            <span> | </span>
-            <span><a href="ml.html">Mentions légales</a></span>
+  <!-- BLOG -->
+  <div id="blog">
+    <h2 class="section-title reveal-title" data-reveal>Blog</h2>
+    <div class="blog-grid" id="blog-grid"><!-- généré par JS --></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>Angel SANCHEZ</span><span class="sep">-</span>
+    <span>Développeur Web</span><span class="sep">-</span>
+    <span>06 17 60 48 63</span><span class="sep">-</span>
+    <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6013010e0308051a4e010e07050c4e030f0e1401031420070d01090c4e030f0d">[email&#160;protected]</a></span><span class="sep">|</span>
+    <span><a href="#">Mentions légales</a></span>
+  </footer>
+
+  <!-- BOUTON ENTRÉE ADMIN -->
+  <button class="admin-entry" id="admin-entry" title="Mode administrateur">⚙</button>
+
+  <!-- BARRE ADMIN (cachée par défaut) -->
+  <div class="admin-bar" id="admin-bar" hidden>
+    <span class="tag-text">🔓 Mode administrateur</span>
+    <span class="hint">Survolez un projet ou un article pour le modifier / supprimer</span>
+    <button id="admin-logout">Quitter</button>
+  </div>
+
+  <!-- MODALE LOGIN -->
+  <div class="overlay center" id="login-overlay" hidden>
+    <div class="modal small">
+      <h3>Connexion admin</h3>
+      <p class="hint">Accès réservé. 🔒</p>
+      <input type="password" id="login-pwd" placeholder="Mot de passe">
+      <p class="warn" id="login-lock" hidden></p>
+      <p class="err" id="login-err" hidden></p>
+      <div class="modal-actions">
+        <button class="btn-ghost" id="login-cancel">Annuler</button>
+        <button class="btn-gold" id="login-submit">Entrer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALE ÉDITION -->
+  <div class="overlay" id="edit-overlay" hidden>
+    <div class="modal">
+      <h3 id="edit-title">Éditer</h3>
+
+      <label>Titre</label>
+      <input id="f-title">
+
+      <!-- Champs projet -->
+      <div id="project-fields">
+        <label>Description</label>
+        <textarea id="f-desc" rows="3"></textarea>
+
+        <label>URL de l'image (laisser vide pour un placeholder)</label>
+        <input id="f-image" placeholder="data/img/mon-projet.png">
+
+        <div class="row">
+          <div>
+            <label>Lien</label>
+            <input id="f-link" placeholder="https://…">
+          </div>
+          <div>
+            <label>Texte du bouton</label>
+            <input id="f-linklabel" placeholder="Voir le site">
+          </div>
         </div>
-    </footer>
 
+        <label>Catégorie</label>
+        <select id="f-category">
+          <option value="web">Web</option>
+          <option value="python">Python</option>
+        </select>
+      </div>
+
+      <!-- Champs article -->
+      <div id="article-fields">
+        <label>Date</label>
+        <input id="f-date" placeholder="15 janvier 2026">
+
+        <label>Extrait</label>
+        <textarea id="f-excerpt" rows="2"></textarea>
+
+        <label>Contenu</label>
+        <textarea id="f-content" rows="5"></textarea>
+      </div>
+
+      <label>Tags (séparés par des virgules)</label>
+      <input id="f-tags" placeholder="HTML, CSS, JavaScript">
+
+      <div class="modal-actions">
+        <button class="btn-ghost" id="edit-cancel">Annuler</button>
+        <button class="btn-gold wide" id="edit-save">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALE LECTURE ARTICLE -->
+  <div class="overlay" id="read-overlay" hidden>
+    <div class="modal read">
+      <span class="article-date" id="read-date"></span>
+      <h2 id="read-title"></h2>
+      <p class="content" id="read-content"></p>
+      <button class="btn-gold" id="read-close">Fermer</button>
+    </div>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/app.js"></script>
 </body>
-<script src="js/navigation.js"></script>
-<script src="js/contact.js"></script>
-
 </html>
-
