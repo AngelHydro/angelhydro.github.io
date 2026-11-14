@@ -165,6 +165,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     outline-offset: 3px;
 }
 
+img {
+    height: auto; /* garde les proportions malgré les attributs width/height (posés pour éviter les sauts de mise en page) */
+}
+
 /* Accessibilité */
 .sr-only {
     position: absolute;
