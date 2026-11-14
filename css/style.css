@@ -156,6 +156,35 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     outline-offset: 3px;
 }
 
+/* Accessibilité */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+.skip-link {
+    position: absolute;
+    left: 15px;
+    top: -60px;
+    z-index: 3000;
+    padding: 10px 18px;
+    background: var(--or);
+    color: var(--texte-fonce);
+    border-radius: 0 0 10px 10px;
+}
+.skip-link:focus {
+    top: 0;
+}
+main:focus {
+    outline: none;
+}
+[id] {
+    scroll-margin-top: 90px; /* les ancres ne passent pas sous le header */
+}
+
 /* Header */
 nav {
     position: sticky; /* reste en haut de la page lors du scroll */
@@ -176,7 +205,7 @@ nav {
     margin-top: 0; margin-bottom: 0; margin-left: 75px; margin-right: 25px;
     width: 40px;
 }
-.logo h3 {
+.logo-name {
     margin-left: 10px;
     color: white;
     text-decoration: none;
@@ -184,7 +213,7 @@ nav {
     font-weight: 400;
     font-family: 'Bitcount';
 }
-.logo h3 a {
+.logo .logo-name {
     font-family: 'Bitcount';
     font-size: 28px;
     font-weight: 400;
@@ -192,7 +221,7 @@ nav {
     text-decoration: none;
     transition: all ease-in-out 0.3s; /* transition pour le hover */
 }
-.logo h3 a:hover {
+.logo .logo-name:hover {
     color: var(--or);
 }
 
@@ -213,7 +242,8 @@ nav {
     text-transform: uppercase;
     transition: all ease-in-out 0.3s; /* transition pour le hover */
 }
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a[aria-current="true"] {
     color: var(--or);
 }
 .nav-links .nav-cta-button {
@@ -227,17 +257,13 @@ nav {
     background-color: var(--or);
 }
 
-.hamburger {
-    display: none; /* caché par défaut, visible en responsive */
-    cursor: pointer; /* curseur pointeur pour indiquer que c'est cliquable */
-    margin-top: 0; margin-bottom: 0; margin-left: 0; margin-right: 15px;
-    width: 34px;
-}
-.hamburger .bar {
-    flex-basis: 100%; /* chaque barre prend toute la largeur */
-    height: 4px;
-    background-color: white;
-    margin: 3px;
+
+/* Icônes du menu : visibles seulement dans la barre mobile */
+.nav-icon {
+    display: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
 }
 
 /* Home */
@@ -310,12 +336,11 @@ nav {
 /* Portfolio */
 .portfolio {
     width: auto;
-    height: 110vh;
+    min-height: 110vh;
     background: var(--or-fond);
     padding-top: 75px;
     padding-bottom: 20px; /* Ajoute un padding-bottom pour laisser de l'espace aux filtres */
     box-sizing: border-box;
-    overflow: hidden;
     position: relative;
 }
 
@@ -326,7 +351,6 @@ nav {
 .portfolio-content {
     max-width: 1200px;
     margin: 0 auto;
-    height: calc(100vh - 95px); /* Ajuste la hauteur pour tenir compte du padding-bottom */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -341,6 +365,8 @@ nav {
 }
 
 .project-card {
+    display: flex;
+    flex-direction: column;
     background: var(--or-carte);
     border-radius: 15px;
     overflow: hidden;
@@ -399,7 +425,8 @@ nav {
     opacity: 0;
     transition: opacity 0.3s ease;
 }
-.project-card:hover .project-overlay {
+.project-card:hover .project-overlay,
+.project-card:focus-within .project-overlay {
     opacity: 1;
 }
 
@@ -420,6 +447,9 @@ nav {
 }
 
 .project-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     padding: 25px;
 }
 .project-info h3 {
@@ -437,6 +467,7 @@ nav {
 }
 
 .project-tags {
+    margin-top: auto; /* étiquettes toujours alignées en bas de la carte */
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -456,8 +487,6 @@ nav {
     background: var(--or-carte-survol);
     color: var(--texte-fonce);
     border-color: var(--or-bord);
-    transform: scale(1.05);
-    cursor: pointer;
 }
 
 .portfolio-filters {
@@ -465,8 +494,7 @@ nav {
     justify-content: center;
     gap: 15px;
     flex-wrap: wrap;
-    margin-top: 30px; /* Remplace margin-top: auto par une marge fixe */
-    margin-bottom: 0; /* Supprime la marge du bas */
+    margin-bottom: 30px; /* Filtres placés au-dessus des projets */
 }
 
 .filter-btn {
@@ -524,6 +552,13 @@ nav {
     margin-bottom: 40px;
 }
 
+.contact-content > * {
+    min-width: 0; /* une adresse longue ne fait plus déborder la colonne */
+}
+.contact-item p {
+    overflow-wrap: anywhere;
+}
+
 .contact-details {
     display: flex;
     flex-direction: column;
@@ -573,6 +608,10 @@ nav {
     border: 2px solid var(--or);
 }
 /* Formulaire */
+.form-hint {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
 .contact-form {
     background: rgba(235, 192, 106, 0.09);
     padding: 40px;
@@ -683,6 +722,21 @@ nav {
 }
 
 
+/* Cartes de taille fixe : titre sur 2 lignes, description sur 4 lignes,
+   la 4e ligne s'efface en fondu si le texte est plus long */
+.project-info h3,
+.blog-card h3 {
+    min-height: 2.4em;
+    align-items: flex-start;
+}
+.project-info p,
+.blog-card p {
+    height: calc(1.75em * 4);
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 1.75em), transparent);
+    mask-image: linear-gradient(to bottom, black calc(100% - 1.75em), transparent);
+}
+
 /* Blog : cartes dans le style des cartes projets */
 .blog-grid {
     max-width: 1200px;
@@ -727,6 +781,9 @@ nav {
 
 
 /* Footer */
+footer a {
+    font-size: inherit;
+}
 footer {
     align-items: center;
     text-align: center;
@@ -745,12 +802,118 @@ footer span {
 
 
 /* ml.html */
-main {
+.legal {
     padding-left: 25px; padding-right: 25px; /* espace latéral */
 }
 .ml {
     padding-top: 100px; /* espace au-dessus du titre */
     padding-bottom: 20px; /* espace en dessous du titre */
+}
+
+/* Disposition : rythme régulier entre sections */
+.about, .portfolio, .contact, .blog {
+    padding-top: 90px;
+    padding-bottom: 90px;
+    min-height: 0;
+}
+h2 {
+    padding-top: 0;
+    padding-bottom: 40px;
+}
+
+/* Accueil : logo à gauche, nom et boutons à droite */
+.home-content {
+    height: auto;
+    min-height: 85vh;
+    gap: 60px;
+    text-align: left;
+}
+.home-content img {
+    margin: 0;
+    width: 220px;
+}
+.home-content h1 {
+    margin: 0;
+}
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.hero-cta {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.hero-cta a {
+    padding: 12px 24px;
+    border-radius: 25px;
+    border: 2px solid var(--or);
+    font-size: 18px;
+}
+.hero-cta a:first-child {
+    background: var(--or);
+    color: var(--texte-fonce);
+}
+.hero-cta a:first-child:hover {
+    background: var(--or-carte-survol);
+}
+
+/* À propos : texte à gauche, photos à droite, conclusion en encadré */
+.about {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    column-gap: 60px;
+    row-gap: 25px;
+    /* même largeur de contenu que les autres sections (1200 px max) */
+    padding-left: max(24px, calc((100% - 1200px) / 2));
+    padding-right: max(24px, calc((100% - 1200px) / 2));
+}
+.about h2 {
+    grid-column: 1 / -1;
+}
+.about-content, .about-content2, .moi {
+    display: contents;
+}
+.about p {
+    text-align: left;
+    padding: 0;
+    grid-column: 1;
+}
+.about-content img {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    width: 100%;
+    align-self: start;
+}
+.about-content2 img {
+    grid-column: 2;
+    grid-row: 4 / span 2;
+    width: 100%;
+    align-self: start;
+}
+.about > p {
+    grid-column: 1 / -1;
+    border-left: 4px solid var(--or);
+    padding: 15px 25px;
+    background: rgba(235, 192, 106, 0.09);
+    border-radius: 0 12px 12px 0;
+}
+
+/* Animations réduites si l'utilisateur le demande */
+@media (prefers-reduced-motion: reduce) {
+    html, body {
+        scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+    .fade-in, .slide-up, .scale-in, .stagger-item, .project-card {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 /* RESPONSIVE STYLES */
@@ -766,87 +929,144 @@ main {
         top: 0;
         left: 0;
         width: 100vw; /* prend toute la largeur de l'écran */
+        box-sizing: border-box; /* le padding ne dépasse plus de l'écran */
         z-index: 2000; /* plus haut que .nav-links */
         background-color: var(--violet-nav);
     }
 
     .logo {
-        height: 80px;
+        height: 60px;
         display: flex;
         align-items: center;
     }
-    .logo img, .logo h3 {
+    .logo img, .logo .logo-name {
         margin-top: 0; margin-bottom: 0; margin-left: 0; margin-right: 10px;
     }
 
-    .hamburger {
-        display: flex;
-        flex-wrap: wrap; /* permet aux barres de passer à la ligne si nécessaire */
-        position: fixed; /* reste en haut de la page lors du scroll */
-        top: 25px;
-        right: 25px;
-        z-index: 2100; /* au-dessus du header */
-    }
-
-    /* Empêche le scroll lorsque le menu hamburger est ouvert */
-    .no-scroll {
-        overflow: hidden;
-        height: 100vh;
-    }
+    /* Barre de navigation flottante : pilule compacte, libellé visible sur l'onglet actif */
     .nav-links {
-        opacity: 0; /* caché par défaut */
-        pointer-events: none; /* empêche les interactions */
-        transition: opacity 0.4s cubic-bezier(.4,0,.2,1); /* transition pour l'ouverture */
         position: fixed;
-        top: 80px; /* sous le header */
         left: 0;
-        width: 100vw;
-        height: calc(100vh - 80px); /* prend tout sauf le header */
-        background: var(--violet-nav);
-        flex-direction: column; /* alignement vertical */
-        align-items: center;
-        justify-content: flex-start; /* aligne les éléments en haut */
-        z-index: 1000; /* en-dessous du header */
-        padding: 40px 0 0 0;
-        margin: 0;
+        right: 0;
+        margin: 0 auto;
+        bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+        width: max-content;
+        max-width: calc(100vw - 24px);
+        padding: 5px;
+        gap: 2px;
+        background: rgba(27, 18, 41, 0.78);
+        -webkit-backdrop-filter: blur(16px) saturate(140%);
+        backdrop-filter: blur(16px) saturate(140%);
+        border: 1px solid rgba(235, 192, 106, 0.22);
+        border-radius: 999px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        z-index: 2000;
     }
-    .nav-links.open {
-        opacity: 1; /* visible lorsque le menu est ouvert */
-        pointer-events: auto; /* permet les interactions */
-    }
-
     .nav-links li {
-        flex-basis: unset; /* réinitialise la largeur */
-        width: 100%;
-        margin: 20px 0;
+        flex: none;
     }
-
-    .nav-links a {
-        text-align: center;
-        font-size: 28px;
-    }
-    .nav-links a:hover {
-        color: var(--or);
-    }
+    .nav-links a,
     .nav-links .nav-cta-button {
-    padding: 30px 16px;
-    margin-left: 0;
-    border: var(--or) solid 2px;
-    border-radius: 50px;
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 0;
+        margin: 0;
+        min-width: 44px;
+        min-height: 44px; /* zone tactile confortable */
+        padding: 0 12px;
+        box-sizing: border-box;
+        justify-content: center;
+        border: 0;
+        border-radius: 999px;
+        font-family: 'Pixelify Sans';
+        font-size: 14px;
+        text-transform: none;
+        color: var(--violet-clair);
+        -webkit-tap-highlight-color: transparent;
+        transition: background-color 0.3s ease, color 0.3s ease, padding 0.3s cubic-bezier(.4,0,.2,1), transform 0.15s ease;
     }
+    .nav-icon {
+        display: block;
+        width: 20px;
+        height: 20px;
+        flex: none;
+    }
+    /* Libellé replié (toujours lu par les lecteurs d'écran), qui se déplie sur l'onglet actif */
+    .nav-links a span {
+        display: inline-block;
+        max-width: 0;
+        opacity: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        transition: max-width 0.35s cubic-bezier(.4,0,.2,1), opacity 0.25s ease;
+    }
+    .nav-links a[aria-current="true"] {
+        gap: 8px;
+        padding: 0 16px;
+        background: var(--or);
+        color: var(--texte-fonce);
+    }
+    .nav-links a[aria-current="true"] span {
+        max-width: 90px;
+        opacity: 1;
+        transition-delay: 0s, 0.1s; /* le texte apparaît une fois la place ouverte */
+    }
+    /* Pas d'effet de survol au doigt : il resterait collé après le toucher */
+    .nav-links a:hover,
     .nav-links .nav-cta-button:hover {
-    background-color: var(--or);
+        color: var(--violet-clair);
+        background: none;
+    }
+    .nav-links a[aria-current="true"]:hover {
+        color: var(--texte-fonce);
+        background: var(--or);
+    }
+    .nav-links a:active {
+        transform: scale(0.94);
+    }
+    footer {
+        padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)); /* laisse la place à la barre */
     }
 
     /* Home */
     .home-content {
         flex-direction: column; /* alignement vertical */
     }
+    .home-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 25px;
+        padding-top: 90px;
+        padding-bottom: 40px;
+        min-height: 0;
+    }
     .home-content img {
-        display: none; /* caché en responsive */
+        width: 140px;
+    }
+    .hero-text {
+        align-items: center;
+    }
+    .hero-cta {
+        justify-content: center;
+    }
+    .about {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .about p {
+        font-size: 17px;
+    }
+    .moi p { order: 1; }
+    .about-content img { order: 2; }
+    .about-content2 p { order: 3; }
+    .about-content2 img { order: 4; }
+    .about > p { order: 5; }
+    .about-content img, .about-content2 img {
+        width: 75%;
+        align-self: center;
     }
     .home-content h1 {
         margin-top: 0; margin-bottom: 0; margin-left: 25px; margin-right: 25px;
@@ -857,9 +1077,6 @@ main {
 
 
     /* A propos */
-    .about p {
-        padding-left: 50px; padding-right: 50px; /* espace latéral */
-    }
     .about-content {
         flex-direction: column; /* alignement vertical */
         padding-left: 0; padding-right: 0; /* retire l'espace latéral */
@@ -915,8 +1132,7 @@ main {
     
     .portfolio-filters {
         gap: 10px;
-        margin-top: 20px; /* Marge fixe en responsive */
-        margin-bottom: 20px; /* Marge en bas pour l'espace */
+        margin-bottom: 20px;
     }
     
     .filter-btn {
@@ -933,6 +1149,17 @@ main {
     
     .contact-info h3, .contact-info p {
       text-align: center;
+    }
+    .contact-info h3 {
+        font-size: 24px;
+        justify-content: center;
+    }
+    .contact-item h4, .contact-item p {
+        text-align: left;
+    }
+    .contact-item p {
+        font-size: 15px;
+        overflow-wrap: normal;
     }
     
     .contact-form {
@@ -962,7 +1189,7 @@ main {
 
     /* Footer */
     footer {
-        padding: 15px 5px; /* réduit l'espace latéral */
+        padding-left: 5px; padding-right: 5px; /* réduit l'espace latéral */
     }
     footer span:nth-child(2), footer span:nth-child(3), footer span:nth-child(4), footer span:nth-child(5), footer span:nth-child(6),footer span:nth-child(7) {
         display: none; /* caché en responsive */

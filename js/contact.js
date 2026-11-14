@@ -5,7 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
+        // Vérifie tous les champs avant l'envoi, et place le curseur sur le premier en erreur
+        const fields = [...contactForm.querySelectorAll('input[required], textarea[required], select[required]')];
+        const invalid = fields.filter(field => !validateField(field));
+        if (invalid.length) {
+            invalid[0].focus();
+            return;
+        }
+
         // Affiche l'état de chargement
         submitBtn.classList.add('loading');
         submitBtn.disabled = true;
@@ -90,12 +98,15 @@ function isValidEmail(email) {
 
 // Affichage des erreurs
 function showFieldError(field, message) {
-    field.style.borderColor = '#ff6b6b';
-    
+    field.style.borderColor = '#FFA3A3';
+    field.setAttribute('aria-invalid', 'true');
+    field.setAttribute('aria-describedby', field.id + '-error');
+
     const errorDiv = document.createElement('div');
     errorDiv.className = 'field-error';
+    errorDiv.id = field.id + '-error';
     errorDiv.textContent = message;
-    errorDiv.style.color = '#ff6b6b';
+    errorDiv.style.color = '#FFA3A3';
     errorDiv.style.fontSize = '14px';
     errorDiv.style.marginTop = '5px';
     
@@ -105,6 +116,8 @@ function showFieldError(field, message) {
 // Suppression des erreurs
 function clearFieldError(field) {
     field.style.borderColor = '';
+    field.removeAttribute('aria-invalid');
+    field.removeAttribute('aria-describedby');
     const errorDiv = field.parentNode.querySelector('.field-error');
     if (errorDiv) {
         errorDiv.remove();
@@ -116,6 +129,7 @@ function showNotification(message, type) {
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
     notification.textContent = message;
+    notification.setAttribute('role', type === 'success' ? 'status' : 'alert');
     
     // Styles de la notification
     notification.style.position = 'fixed';
@@ -131,9 +145,9 @@ function showNotification(message, type) {
     notification.style.transition = 'transform 0.3s ease';
     
     if (type === 'success') {
-        notification.style.background = '#4CAF50';
+        notification.style.background = '#2E7D32';
     } else {
-        notification.style.background = '#f44336';
+        notification.style.background = '#C62828';
     }
     
     document.body.appendChild(notification);
