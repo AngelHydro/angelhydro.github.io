@@ -98,7 +98,7 @@ h1 {
     font-weight: 400;
     color: var(--or);
 }
-h2 {
+h2, .legal h1 {
     font-family: 'Bitcount';
     font-size: 45px;
     font-weight: 400;
@@ -120,9 +120,10 @@ h3 {
     display: flex;
     margin: 0; /* Retire les marges par défaut */
 }
-h4 {
+h4, .legal h2 {
     font-family: 'Bitcount';
     font-size: 30px;
+    justify-content: normal;
     font-weight: 400;
     color: white;
     text-transform: uppercase; /* Met en majuscule les lettres */
@@ -648,7 +649,6 @@ nav {
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    outline: none;
     border-color: var(--or);
     background: rgba(255, 255, 255, 0.08);
     transform: translateY(-2px);
@@ -830,11 +830,14 @@ footer span {
 }
 
 
+/* Liens dans le texte : soulignés pour ne pas dépendre de la couleur seule */
+p a { text-decoration: underline; text-underline-offset: 3px; }
+
 /* ml.html */
 .legal {
     padding-left: 25px; padding-right: 25px; /* espace latéral */
 }
-.ml {
+.legal .ml {
     padding-top: 100px; /* espace au-dessus du titre */
     padding-bottom: 20px; /* espace en dessous du titre */
 }
