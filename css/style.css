@@ -84,28 +84,25 @@ h1 {
     font-size: 50px;
     font-weight: 400;
     color: var(--or);
-    text-decoration: none;
 }
 h2 {
     font-family: 'Bitcount';
     font-size: 45px;
     font-weight: 400;
     color: white;
-    text-decoration: none;
     text-transform: uppercase; /* Met en majuscule les lettres */
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0; /* Retire les marges par défaut */
-    padding-top: 50px; /* Ajoute un espace au-dessus du titre */
-    padding-bottom: 50px; /* Ajoute un espace en dessous du titre */
+    padding-top: 0;
+    padding-bottom: 40px; /* espace sous le titre */
 }
 h3 {
     font-family: 'Bitcount';
     font-size: 35px;
     font-weight: 400;
     color: white;
-    text-decoration: none;
     text-transform: uppercase; /* Met en majuscule les lettres */
     display: flex;
     margin: 0; /* Retire les marges par défaut */
@@ -115,7 +112,6 @@ h4 {
     font-size: 30px;
     font-weight: 400;
     color: white;
-    text-decoration: none;
     text-transform: uppercase; /* Met en majuscule les lettres */
     display: flex;
     align-items: center;
@@ -127,7 +123,6 @@ p {
     font-family: 'Pixelify Sans';
     font-size: 20px;
     color: white;
-    text-decoration: none;
     line-height: 1.75; /* Améliore la lisibilité */
     margin: 0; /* Retire les marges par défaut */
 }
@@ -135,7 +130,6 @@ li {
     font-family: 'Pixelify Sans';
     font-size: 20px;
     color: white;
-    text-decoration: none;
     line-height: 1.75; /* Améliore la lisibilité */
     margin: 0; /* Retire les marges par défaut */
 }
@@ -208,7 +202,6 @@ nav {
 .logo-name {
     margin-left: 10px;
     color: white;
-    text-decoration: none;
     font-size: 28px;
     font-weight: 400;
     font-family: 'Bitcount';
@@ -266,82 +259,81 @@ nav {
     stroke-width: 2;
 }
 
-/* Home */
+/* Home : logo à gauche, nom et boutons à droite */
 .home-content {
     width: 100%;
-    height: 100vh;
+    min-height: 85vh;
     display: flex;
-    flex-direction: row; /* alignement horizontal */
     align-items: center;
     justify-content: center;
-    text-align: center;
+    gap: 60px;
+    text-align: left;
 }
 .home-content img {
-    margin-top: 0; margin-bottom: 0; margin-left: 100px; margin-right: 50px;
+    width: 220px;
 }
 .home-content h1 {
-    margin-top: 0; margin-bottom: 0; margin-left: 50px; margin-right: 75px;
+    margin: 0;
 }
 .home-content h1 span {
     font-size: 40px;
     color: var(--violet-clair);
 }
 
-/* A propos */
+/* A propos : texte à gauche, photos à droite, conclusion en encadré */
 .about {
-    width: 100%;
-    height: auto; /* hauteur automatique pour s'adapter au contenu */
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    column-gap: 60px;
+    row-gap: 25px;
     background-color: var(--violet);
-    padding-top: 75px; /* espace au-dessus du contenu */
+    padding-top: 90px;
+    padding-bottom: 90px;
+    /* même largeur de contenu que les autres sections (1200 px max) */
+    padding-left: max(24px, calc((100% - 1200px) / 2));
+    padding-right: max(24px, calc((100% - 1200px) / 2));
+}
+.about h2 {
+    grid-column: 1 / -1;
+}
+.about-content, .about-content2, .moi {
+    display: contents;
 }
 .about p {
-    text-align: center;
-    padding-top: 25px; padding-bottom: 25px; padding-left: 50px; padding-right: 50px; /* espace latéral */
+    text-align: left;
+    padding: 0;
+    grid-column: 1;
 }
-.about-content {
-    display: flex;
-    flex-direction: row; /* alignement horizontal */
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding-left: 50px; padding-right: 50px; /* espace latéral */
+.about-content img,
+.about-content2 img {
+    grid-column: 2;
+    width: 100%;
+    height: auto;
+    align-self: start;
+    border-radius: 10px; /* arrondit les coins de l'image */
 }
 .about-content img {
-    width: 30%;
-    height: auto;
-    border-radius: 10px; /* arrondit les coins de l'image */
-}
-.about-content p {
-    padding-left: 0;
-}
-.moi {
-    display: flex;
-    flex-direction: column; /* alignement vertical */
-}
-.about-content2 {
-    display: flex;
-    flex-direction: row; /* alignement horizontal */
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding-left: 50px; padding-right: 50px; /* espace latéral */
+    grid-row: 2 / span 2;
 }
 .about-content2 img {
-    width: 20%;
-    height: auto;
-    border-radius: 10px; /* arrondit les coins de l'image */
+    grid-row: 4 / span 2;
+}
+.about > p {
+    grid-column: 1 / -1;
+    border-left: 4px solid var(--or);
+    padding: 15px 25px;
+    background: rgba(235, 192, 106, 0.09);
+    border-radius: 0 12px 12px 0;
 }
 
 
 /* Portfolio */
 .portfolio {
-    width: auto;
-    min-height: 110vh;
     background: var(--or-fond);
-    padding-top: 75px;
-    padding-bottom: 20px; /* Ajoute un padding-bottom pour laisser de l'espace aux filtres */
+    padding-top: 90px;
+    padding-bottom: 90px;
     box-sizing: border-box;
-    position: relative;
 }
 
 .portfolio h2 {
@@ -373,9 +365,7 @@ nav {
     transition: all 0.3s ease;
     border: 2px solid var(--or-bord);
     z-index: 1; /* Ajoute cette ligne pour s'assurer que les cartes restent en dessous du header */
-}
-/* Animation des cartes */
-.project-card {
+    /* Animation d'apparition */
     animation: fadeInUp 0.6s ease forwards;
     opacity: 0;
     transform: translateY(30px);
@@ -521,11 +511,9 @@ nav {
 
 /* Contact */
 .contact {
-    width: auto;
-    min-height: 110vh;
     background: var(--violet);
-    padding-top: 75px;
-    padding-bottom: 50px;
+    padding-top: 90px;
+    padding-bottom: 90px;
 }
 
 .contact-content {
@@ -554,9 +542,6 @@ nav {
 
 .contact-content > * {
     min-width: 0; /* une adresse longue ne fait plus déborder la colonne */
-}
-.contact-item p {
-    overflow-wrap: anywhere;
 }
 
 .contact-details {
@@ -591,9 +576,7 @@ nav {
     color: white;
     font-size: 16px;
     margin: 0;
-}
-.contact-item:last-child {
-    cursor: pointer;
+    overflow-wrap: anywhere;
 }
 
 .contact-icon {
@@ -672,6 +655,36 @@ nav {
 }
 
 
+/* Messages du formulaire */
+.form-group [aria-invalid="true"] {
+    border-color: #FFA3A3;
+}
+.field-error {
+    color: #FFA3A3;
+    font-size: 14px;
+    margin-top: 5px;
+}
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    padding: 15px 25px;
+    border-radius: 8px;
+    color: white;
+    font-family: 'Pixelify Sans';
+    font-size: 16px;
+    background: #C62828;
+    transform: translateX(calc(100% + 20px)); /* hors de l'écran */
+    transition: transform 0.3s ease;
+}
+.notification.success {
+    background: #2E7D32;
+}
+.notification.show {
+    transform: none;
+}
+
 .submit-btn {
     width: 100%;
     padding: 18px;
@@ -708,10 +721,9 @@ nav {
 
 /* Blog */
 .blog {
-    width: 100%;
-    min-height: 110vh;
     background-color: var(--violet-nuit);
-    padding-top: 75px; /* espace au-dessus du contenu */
+    padding-top: 90px;
+    padding-bottom: 90px;
 }
 .blog-content {
     display: flex;
@@ -810,31 +822,7 @@ footer span {
     padding-bottom: 20px; /* espace en dessous du titre */
 }
 
-/* Disposition : rythme régulier entre sections */
-.about, .portfolio, .contact, .blog {
-    padding-top: 90px;
-    padding-bottom: 90px;
-    min-height: 0;
-}
-h2 {
-    padding-top: 0;
-    padding-bottom: 40px;
-}
-
-/* Accueil : logo à gauche, nom et boutons à droite */
-.home-content {
-    height: auto;
-    min-height: 85vh;
-    gap: 60px;
-    text-align: left;
-}
-.home-content img {
-    margin: 0;
-    width: 220px;
-}
-.home-content h1 {
-    margin: 0;
-}
+/* Accueil : bloc du nom et boutons */
 .hero-text {
     display: flex;
     flex-direction: column;
@@ -859,47 +847,6 @@ h2 {
     background: var(--or-carte-survol);
 }
 
-/* À propos : texte à gauche, photos à droite, conclusion en encadré */
-.about {
-    box-sizing: border-box;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 320px;
-    column-gap: 60px;
-    row-gap: 25px;
-    /* même largeur de contenu que les autres sections (1200 px max) */
-    padding-left: max(24px, calc((100% - 1200px) / 2));
-    padding-right: max(24px, calc((100% - 1200px) / 2));
-}
-.about h2 {
-    grid-column: 1 / -1;
-}
-.about-content, .about-content2, .moi {
-    display: contents;
-}
-.about p {
-    text-align: left;
-    padding: 0;
-    grid-column: 1;
-}
-.about-content img {
-    grid-column: 2;
-    grid-row: 2 / span 2;
-    width: 100%;
-    align-self: start;
-}
-.about-content2 img {
-    grid-column: 2;
-    grid-row: 4 / span 2;
-    width: 100%;
-    align-self: start;
-}
-.about > p {
-    grid-column: 1 / -1;
-    border-left: 4px solid var(--or);
-    padding: 15px 25px;
-    background: rgba(235, 192, 106, 0.09);
-    border-radius: 0 12px 12px 0;
-}
 
 /* Animations réduites si l'utilisateur le demande */
 @media (prefers-reduced-motion: reduce) {
@@ -919,9 +866,6 @@ h2 {
 /* RESPONSIVE STYLES */
 
 @media (max-width: 768px) {
-    p {
-        padding-left: 0; padding-right: 0; /* retire l'espace latéral */
-    }
     /* Header */
     nav {
         flex-wrap: wrap; /* permet aux éléments de passer à la ligne */
@@ -1030,9 +974,6 @@ h2 {
 
     /* Home */
     .home-content {
-        flex-direction: column; /* alignement vertical */
-    }
-    .home-content {
         flex-direction: column;
         text-align: center;
         gap: 25px;
@@ -1059,14 +1000,14 @@ h2 {
     .about p {
         font-size: 17px;
     }
-    .moi p { order: 1; }
-    .about-content img { order: 2; }
-    .about-content2 p { order: 3; }
-    .about-content2 img { order: 4; }
-    .about > p { order: 5; }
+    /* les paragraphes, puis les photos, puis la conclusion */
     .about-content img, .about-content2 img {
+        order: 1;
         width: 75%;
         align-self: center;
+    }
+    .about > p {
+        order: 2;
     }
     .home-content h1 {
         margin-top: 0; margin-bottom: 0; margin-left: 25px; margin-right: 25px;
@@ -1076,38 +1017,12 @@ h2 {
     }
 
 
-    /* A propos */
-    .about-content {
-        flex-direction: column; /* alignement vertical */
-        padding-left: 0; padding-right: 0; /* retire l'espace latéral */
-    }
-    .about-content img {
-        width: 75%; /* réduit la taille de l'image */
-    }
-    .about-content2 {
-        flex-direction: column; /* alignement vertical */
-        padding-left: 0; padding-right: 0; /* retire l'espace latéral */
-    }
-    .about-content2 img {
-        order: 2; /* change l'ordre de l'image */
-        width: 75%; /* réduit la taille de l'image */
-    }
-    .about-content2 p {
-        order: 1 /* change l'ordre du texte */
-    }
 
     /* Portfolio */
     .portfolio {
-        height: auto; /* Change la hauteur fixe en hauteur automatique en responsive */
-        min-height: 100vh; /* Garde une hauteur minimale */
+        min-height: 100vh;
         padding-top: 50px;
         padding-bottom: 30px;
-        overflow: visible; /* Permet le scroll en responsive */
-    }
-    
-    .portfolio-content {
-        height: auto; /* Hauteur automatique en responsive */
-        justify-content: flex-start; /* Aligne le contenu en haut */
     }
     
     .portfolio-grid {

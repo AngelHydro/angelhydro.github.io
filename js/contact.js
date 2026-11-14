@@ -98,7 +98,6 @@ function isValidEmail(email) {
 
 // Affichage des erreurs
 function showFieldError(field, message) {
-    field.style.borderColor = '#FFA3A3';
     field.setAttribute('aria-invalid', 'true');
     field.setAttribute('aria-describedby', field.id + '-error');
 
@@ -106,16 +105,12 @@ function showFieldError(field, message) {
     errorDiv.className = 'field-error';
     errorDiv.id = field.id + '-error';
     errorDiv.textContent = message;
-    errorDiv.style.color = '#FFA3A3';
-    errorDiv.style.fontSize = '14px';
-    errorDiv.style.marginTop = '5px';
     
     field.parentNode.appendChild(errorDiv);
 }
 
 // Suppression des erreurs
 function clearFieldError(field) {
-    field.style.borderColor = '';
     field.removeAttribute('aria-invalid');
     field.removeAttribute('aria-describedby');
     const errorDiv = field.parentNode.querySelector('.field-error');
@@ -131,37 +126,12 @@ function showNotification(message, type) {
     notification.textContent = message;
     notification.setAttribute('role', type === 'success' ? 'status' : 'alert');
     
-    // Styles de la notification
-    notification.style.position = 'fixed';
-    notification.style.top = '20px';
-    notification.style.right = '20px';
-    notification.style.padding = '15px 25px';
-    notification.style.borderRadius = '8px';
-    notification.style.color = 'white';
-    notification.style.fontFamily = 'Pixelify Sans';
-    notification.style.fontSize = '16px';
-    notification.style.zIndex = '10000';
-    notification.style.transform = 'translateX(100%)';
-    notification.style.transition = 'transform 0.3s ease';
-    
-    if (type === 'success') {
-        notification.style.background = '#2E7D32';
-    } else {
-        notification.style.background = '#C62828';
-    }
-    
     document.body.appendChild(notification);
-    
-    // Animation d'entrée
+
+    // Animation d'entrée, puis sortie et suppression après 4 secondes
+    setTimeout(() => notification.classList.add('show'), 100);
     setTimeout(() => {
-        notification.style.transform = 'translateX(0)';
-    }, 100);
-    
-    // Auto-suppression
-    setTimeout(() => {
-        notification.style.transform = 'translateX(100%)';
-        setTimeout(() => {
-            document.body.removeChild(notification);
-        }, 300);
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
     }, 4000);
 }
