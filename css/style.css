@@ -45,7 +45,7 @@ html, body {
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.8s ease;
+    transition: opacity 0.8s ease, transform 0.8s ease; /* seulement l'apparition */
 }
 .fade-in.visible {
     opacity: 1;
@@ -55,7 +55,7 @@ html, body {
 .slide-up {
     opacity: 0;
     transform: translateY(50px);
-    transition: all 0.8s ease;
+    transition: opacity 0.8s ease, transform 0.8s ease; /* seulement l'apparition */
 }
 .slide-up.visible {
     opacity: 1;
@@ -65,7 +65,7 @@ html, body {
 .scale-in {
     opacity: 0;
     transform: scale(0.8);
-    transition: all 0.6s ease;
+    transition: opacity 0.6s ease, transform 0.6s ease; /* seulement l'apparition */
 }
 .scale-in.visible {
     opacity: 1;
@@ -76,7 +76,7 @@ html, body {
 .stagger-item {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.6s ease;
+    transition: opacity 0.6s ease, transform 0.6s ease; /* seulement l'apparition */
 }
 .stagger-item.visible {
     opacity: 1;
@@ -151,7 +151,7 @@ a {
     font-size: 20px;
     color: var(--or);
     text-decoration: none;
-    transition: all ease-in-out 0.3s; /* transition pour le hover */
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
 }
 a:hover {
     color: white;
@@ -192,8 +192,8 @@ main:focus {
     scroll-margin-top: var(--header-h); /* la section arrive juste sous le header */
 }
 
-/* Chaque section occupe au moins toute la hauteur visible sous le header */
-.about, .portfolio, .contact, .blog {
+/* Chaque section (et l'accueil) occupe au moins toute la hauteur visible sous le header */
+.home-content, .about, .portfolio, .contact, .blog {
     box-sizing: border-box;
     min-height: calc(100vh - var(--header-h));
     min-height: calc(100svh - var(--header-h)); /* hauteur réelle sur téléphone (barres du navigateur) */
@@ -232,7 +232,7 @@ nav {
     font-weight: 400;
     color: white;
     text-decoration: none;
-    transition: all ease-in-out 0.3s; /* transition pour le hover */
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
 }
 .logo .logo-name:hover {
     color: var(--or);
@@ -253,7 +253,7 @@ nav {
     font-weight: 400;
     font-family: 'Bitcount';
     text-transform: uppercase;
-    transition: all ease-in-out 0.3s; /* transition pour le hover */
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
 }
 .nav-links a:hover,
 .nav-links a[aria-current="true"] {
@@ -282,9 +282,6 @@ nav {
 /* Home : logo à gauche, nom et boutons à droite */
 .home-content {
     width: 100%;
-    box-sizing: border-box;
-    min-height: calc(100vh - var(--header-h));
-    min-height: calc(100svh - var(--header-h));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -304,7 +301,6 @@ nav {
 
 /* A propos : texte à gauche, photos à droite, conclusion en encadré */
 .about {
-    box-sizing: border-box;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 320px;
     column-gap: 60px;
@@ -355,7 +351,6 @@ nav {
     background: var(--or-fond);
     padding-top: 90px;
     padding-bottom: 90px;
-    box-sizing: border-box;
 }
 
 .portfolio h2 {
@@ -384,7 +379,7 @@ nav {
     background: var(--or-carte);
     border-radius: 15px;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
     border: 2px solid var(--or-bord);
     z-index: 1; /* Ajoute cette ligne pour s'assurer que les cartes restent en dessous du header */
     /* Animation d'apparition */
@@ -448,7 +443,7 @@ nav {
     padding: 10px 20px;
     border-radius: 25px;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
     border: 2px solid var(--or-bord);
 }
 .project-link:hover {
@@ -493,7 +488,7 @@ nav {
     font-size: 12px;
     font-weight: 600;
     border: 1px solid var(--or-bord-fonce);
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
 }
 .tag:hover {
     background: var(--or-carte-survol);
@@ -516,7 +511,7 @@ nav {
     padding: 12px 24px;
     border-radius: 25px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
     font-family: 'Pixelify Sans';
     font-size: 16px;
     font-weight: 600;
@@ -580,7 +575,7 @@ nav {
     background: rgba(235, 192, 106, 0.09);
     border-radius: 12px;
     border: 2px solid rgba(235, 192, 106, 0.35);
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
 }
 .contact-item:hover {
     background: rgba(235, 192, 106, 0.15);
@@ -646,7 +641,7 @@ nav {
     color: white;
     font-family: 'Pixelify Sans';
     font-size: 16px;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
     box-sizing: border-box;
     cursor: pointer;
 }
@@ -669,7 +664,7 @@ nav {
     font-family: 'Pixelify Sans';
     font-size: 16px;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
 }
 .form-group select option {
     color: black;
@@ -718,7 +713,7 @@ nav {
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
     position: relative;
     overflow: hidden;
 }
