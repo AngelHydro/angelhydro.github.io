@@ -129,3 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateActive();
 });
+
+// Mode administrateur (index.html?admin) : chargé seulement à la demande, rien pour les visiteurs
+if (new URLSearchParams(location.search).has('admin') && document.querySelector('.portfolio-grid')) {
+    document.head.append(Object.assign(document.createElement('script'), { src: 'js/admin.js' }));
+}
