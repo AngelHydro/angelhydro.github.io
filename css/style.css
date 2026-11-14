@@ -19,6 +19,7 @@
 
 /* Palette violet & or */
 :root {
+    --header-h: 104px;        /* hauteur du header, mise à jour par navigation.js */
     --violet-nuit: #1B1229;   /* fond principal : accueil, blog */
     --violet: #4A4258;        /* sections À propos / Contact */
     --violet-clair: #C0B2D8;  /* textes secondaires */
@@ -44,7 +45,7 @@ html, body {
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.8s ease;
+    transition: opacity 0.8s ease, transform 0.8s ease; /* seulement l'apparition */
 }
 .fade-in.visible {
     opacity: 1;
@@ -54,7 +55,7 @@ html, body {
 .slide-up {
     opacity: 0;
     transform: translateY(50px);
-    transition: all 0.8s ease;
+    transition: opacity 0.8s ease, transform 0.8s ease; /* seulement l'apparition */
 }
 .slide-up.visible {
     opacity: 1;
@@ -64,7 +65,7 @@ html, body {
 .scale-in {
     opacity: 0;
     transform: scale(0.8);
-    transition: all 0.6s ease;
+    transition: opacity 0.6s ease, transform 0.6s ease; /* seulement l'apparition */
 }
 .scale-in.visible {
     opacity: 1;
@@ -75,7 +76,7 @@ html, body {
 .stagger-item {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.6s ease;
+    transition: opacity 0.6s ease, transform 0.6s ease; /* seulement l'apparition */
 }
 .stagger-item.visible {
     opacity: 1;
@@ -150,7 +151,7 @@ a {
     font-size: 20px;
     color: var(--or);
     text-decoration: none;
-    transition: all ease-in-out 0.3s; /* transition pour le hover */
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
 }
 a:hover {
     color: white;
@@ -188,7 +189,14 @@ main:focus {
     outline: none;
 }
 [id] {
-    scroll-margin-top: 90px; /* les ancres ne passent pas sous le header */
+    scroll-margin-top: var(--header-h); /* la section arrive juste sous le header */
+}
+
+/* Chaque section (et l'accueil) occupe au moins toute la hauteur visible sous le header */
+.home-content, .about, .portfolio, .contact, .blog {
+    box-sizing: border-box;
+    min-height: calc(100vh - var(--header-h));
+    min-height: calc(100svh - var(--header-h)); /* hauteur réelle sur téléphone (barres du navigateur) */
 }
 
 /* Header */
@@ -224,7 +232,7 @@ nav {
     font-weight: 400;
     color: white;
     text-decoration: none;
-    transition: all ease-in-out 0.3s; /* transition pour le hover */
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
 }
 .logo .logo-name:hover {
     color: var(--or);
@@ -245,7 +253,7 @@ nav {
     font-weight: 400;
     font-family: 'Bitcount';
     text-transform: uppercase;
-    transition: all ease-in-out 0.3s; /* transition pour le hover */
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
 }
 .nav-links a:hover,
 .nav-links a[aria-current="true"] {
@@ -274,7 +282,6 @@ nav {
 /* Home : logo à gauche, nom et boutons à droite */
 .home-content {
     width: 100%;
-    min-height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -294,7 +301,6 @@ nav {
 
 /* A propos : texte à gauche, photos à droite, conclusion en encadré */
 .about {
-    box-sizing: border-box;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 320px;
     column-gap: 60px;
@@ -345,7 +351,6 @@ nav {
     background: var(--or-fond);
     padding-top: 90px;
     padding-bottom: 90px;
-    box-sizing: border-box;
 }
 
 .portfolio h2 {
@@ -374,7 +379,7 @@ nav {
     background: var(--or-carte);
     border-radius: 15px;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
     border: 2px solid var(--or-bord);
     z-index: 1; /* Ajoute cette ligne pour s'assurer que les cartes restent en dessous du header */
     /* Animation d'apparition */
@@ -438,7 +443,7 @@ nav {
     padding: 10px 20px;
     border-radius: 25px;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
     border: 2px solid var(--or-bord);
 }
 .project-link:hover {
@@ -483,7 +488,7 @@ nav {
     font-size: 12px;
     font-weight: 600;
     border: 1px solid var(--or-bord-fonce);
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
 }
 .tag:hover {
     background: var(--or-carte-survol);
@@ -506,7 +511,7 @@ nav {
     padding: 12px 24px;
     border-radius: 25px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
     font-family: 'Pixelify Sans';
     font-size: 16px;
     font-weight: 600;
@@ -570,7 +575,7 @@ nav {
     background: rgba(235, 192, 106, 0.09);
     border-radius: 12px;
     border: 2px solid rgba(235, 192, 106, 0.35);
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
 }
 .contact-item:hover {
     background: rgba(235, 192, 106, 0.15);
@@ -636,7 +641,7 @@ nav {
     color: white;
     font-family: 'Pixelify Sans';
     font-size: 16px;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
     box-sizing: border-box;
     cursor: pointer;
 }
@@ -659,7 +664,7 @@ nav {
     font-family: 'Pixelify Sans';
     font-size: 16px;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
 }
 .form-group select option {
     color: black;
@@ -708,7 +713,7 @@ nav {
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
     position: relative;
     overflow: hidden;
 }
@@ -878,6 +883,9 @@ footer span {
 /* RESPONSIVE STYLES */
 
 @media (max-width: 768px) {
+    :root {
+        --header-h: 60px;
+    }
     /* Header */
     nav {
         flex-wrap: wrap; /* permet aux éléments de passer à la ligne */
@@ -908,8 +916,8 @@ footer span {
         bottom: calc(14px + env(safe-area-inset-bottom, 0px));
         width: max-content;
         max-width: calc(100vw - 24px);
-        padding: 5px;
-        gap: 2px;
+        padding: 6px;
+        gap: 6px;
         background: rgba(27, 18, 41, 0.78);
         -webkit-backdrop-filter: blur(16px) saturate(140%);
         backdrop-filter: blur(16px) saturate(140%);
@@ -927,15 +935,15 @@ footer span {
         align-items: center;
         gap: 0;
         margin: 0;
-        min-width: 44px;
-        min-height: 44px; /* zone tactile confortable */
-        padding: 0 12px;
+        min-width: 52px;
+        min-height: 52px; /* zone tactile confortable */
+        padding: 0 15px;
         box-sizing: border-box;
         justify-content: center;
         border: 0;
         border-radius: 999px;
         font-family: 'Pixelify Sans';
-        font-size: 14px;
+        font-size: 15px;
         text-transform: none;
         color: var(--violet-clair);
         -webkit-tap-highlight-color: transparent;
@@ -943,8 +951,8 @@ footer span {
     }
     .nav-icon {
         display: block;
-        width: 20px;
-        height: 20px;
+        width: 24px;
+        height: 24px;
         flex: none;
     }
     /* Libellé replié (toujours lu par les lecteurs d'écran), qui se déplie sur l'onglet actif */
@@ -958,12 +966,12 @@ footer span {
     }
     .nav-links a[aria-current="true"] {
         gap: 8px;
-        padding: 0 16px;
+        padding: 0 20px;
         background: var(--or);
         color: var(--texte-fonce);
     }
     .nav-links a[aria-current="true"] span {
-        max-width: 90px;
+        max-width: 100px;
         opacity: 1;
         transition-delay: 0s, 0.1s; /* le texte apparaît une fois la place ouverte */
     }
@@ -981,7 +989,7 @@ footer span {
         transform: scale(0.94);
     }
     footer {
-        padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)); /* laisse la place à la barre */
+        padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px)); /* laisse la place à la barre */
     }
 
     /* Home */
@@ -991,7 +999,8 @@ footer span {
         gap: 25px;
         padding-top: 90px;
         padding-bottom: 40px;
-        min-height: 0;
+        min-height: 100vh; /* le header est posé par-dessus l'accueil sur téléphone */
+        min-height: 100svh;
     }
     .home-content img {
         width: 140px;
@@ -1032,7 +1041,6 @@ footer span {
 
     /* Portfolio */
     .portfolio {
-        min-height: 100vh;
         padding-top: 50px;
         padding-bottom: 30px;
     }
@@ -1105,7 +1113,6 @@ footer span {
 
     /* Blog */
     .blog {
-        min-height: 100vh;
         padding-bottom: 50px;
     }
     .blog-grid {

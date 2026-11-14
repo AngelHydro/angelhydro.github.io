@@ -1,5 +1,12 @@
 const navLinks = document.querySelector('.nav-links');
 
+// Hauteur réelle du header, utilisée en CSS pour que les sections arrivent juste dessous.
+// ResizeObserver réagit après la mise en page : changement de largeur, chargement des polices…
+const header = document.querySelector('nav');
+new ResizeObserver(() => {
+    document.documentElement.style.setProperty('--header-h', header.getBoundingClientRect().height + 'px');
+}).observe(header);
+
 // Liens internes (#section) : défilement vers la section sans recharger la page.
 // Évite aussi le rechargement de la page entière quand le site est affiché dans un cadre.
 document.addEventListener('click', (e) => {
@@ -50,6 +57,17 @@ function releaseLock() {
     clearTimeout(lockTimer);
     lockedId = null;
     updateActive();
+}
+// Arrivée depuis une autre page ou par un lien direct (#section) : le navigateur saute
+// à l'ancre avant la fin du chargement des images et des polices, qui décalent ensuite la page.
+// Tant que le visiteur n'a pas bougé, on se replace sur la section à chaque changement de hauteur.
+const hashTarget = location.hash && document.getElementById(location.hash.slice(1));
+if (hashTarget) {
+    const keepAnchor = new ResizeObserver(() => hashTarget.scrollIntoView({ behavior: 'instant' }));
+    keepAnchor.observe(document.body);
+    const stop = () => keepAnchor.disconnect();
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(type => addEventListener(type, stop, { once: true, passive: true }));
+    setTimeout(stop, 3000);
 }
 addEventListener('scrollend', () => { if (lockedId) releaseLock(); });
 addEventListener('scroll', () => requestAnimationFrame(updateActive), { passive: true });
