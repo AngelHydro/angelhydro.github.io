@@ -59,7 +59,7 @@ function askToken() {
                 <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Créer un jeton<span class="sr-only"> (nouvel onglet)</span></a></p>
                 <label for="admin-token">Jeton</label>
                 <input type="password" id="admin-token" required autocomplete="off">
-                <label><input type="checkbox" id="admin-remember"> Se souvenir sur cet appareil</label>
+                <label><input type="checkbox" id="admin-remember"> Se souvenir sur cet appareil (seulement sur un appareil personnel)</label>
                 <p role="alert" id="admin-error"></p>
                 <div class="actions"><button value="cancel" formnovalidate>Annuler</button><button class="primary" value="ok">Valider</button></div>
             </form>`;
@@ -152,6 +152,7 @@ function editLink(card) {
     const old = card.querySelector('.project-link');
     const url = prompt('Adresse du projet (vide pour retirer le bouton) :', old?.getAttribute('href') || 'https://');
     if (url === null) return;
+    if (url.trim() && !/^https?:\/\//i.test(url.trim())) return alert('Adresse refusée : elle doit commencer par https:// ou http://');
     card.querySelector('.project-overlay')?.remove();
     if (!url.trim()) return;
     const label = prompt('Texte du bouton :', old?.querySelector('span')?.textContent || 'Voir le projet');
@@ -242,6 +243,8 @@ async function save(bar) {
 
 // ---------- Démarrage ----------
 (async () => {
+    // Refuse de s'ouvrir dans un cadre (une autre page pourrait faire cliquer à l'aveugle sur « Enregistrer »)
+    if (window.top !== window) return;
     if (!token && !(await askToken())) return;
     document.head.append(Object.assign(document.createElement('style'), { textContent: css }));
     document.documentElement.dataset.admin = '';
