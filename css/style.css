@@ -39,6 +39,7 @@ html, body {
     padding: 0;
     background-color: var(--violet-nuit);
     scroll-behavior: smooth;
+    scroll-padding-top: var(--header-h); /* sections et focus clavier arrivent juste sous le header */
 }
 
 /* Nouvelles animations au scroll */
@@ -189,9 +190,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 main:focus {
     outline: none;
 }
-[id] {
-    scroll-margin-top: var(--header-h); /* la section arrive juste sous le header */
-}
 
 /* Chaque section (et l'accueil) occupe au moins toute la hauteur visible sous le header */
 .home-content, .about, .portfolio, .contact, .blog {
@@ -257,7 +255,7 @@ nav {
     transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
 }
 .nav-links a:hover,
-.nav-links a[aria-current="true"] {
+.nav-links a[aria-current="location"] {
     color: var(--or);
 }
 .nav-links .nav-cta-button {
@@ -967,13 +965,13 @@ p a { text-decoration: underline; text-underline-offset: 3px; }
         white-space: nowrap;
         transition: max-width 0.35s cubic-bezier(.4,0,.2,1), opacity 0.25s ease;
     }
-    .nav-links a[aria-current="true"] {
+    .nav-links a[aria-current="location"] {
         gap: 8px;
         padding: 0 20px;
         background: var(--or);
         color: var(--texte-fonce);
     }
-    .nav-links a[aria-current="true"] span {
+    .nav-links a[aria-current="location"] span {
         max-width: 100px;
         opacity: 1;
         transition-delay: 0s, 0.1s; /* le texte apparaît une fois la place ouverte */
@@ -984,7 +982,7 @@ p a { text-decoration: underline; text-underline-offset: 3px; }
         color: var(--violet-clair);
         background: none;
     }
-    .nav-links a[aria-current="true"]:hover {
+    .nav-links a[aria-current="location"]:hover {
         color: var(--texte-fonce);
         background: var(--or);
     }
@@ -993,6 +991,9 @@ p a { text-decoration: underline; text-underline-offset: 3px; }
     }
     footer {
         padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px)); /* laisse la place à la barre */
+    }
+    html {
+        scroll-padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px)); /* ni sous la barre du bas */
     }
 
     /* Home */
