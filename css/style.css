@@ -1,7 +1,19 @@
-/* Pixelify font */
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
-/* Bitcount font */
-@import url('https://fonts.googleapis.com/css2?family=Bitcount:wght@100..900&display=swap');
+/* Polices hébergées sur le site (licence SIL Open Font License) :
+   aucune requête vers Google, donc aucune adresse IP transmise à un tiers */
+@font-face {
+    font-family: 'Pixelify Sans';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('../data/fonts/pixelify-sans-latin.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Bitcount';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('../data/fonts/bitcount-latin.woff2') format('woff2');
+}
 
 /* GLOBAL STYLES */
 
