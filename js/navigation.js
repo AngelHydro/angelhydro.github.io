@@ -27,7 +27,7 @@ let lockTimer;
 function setActive(id) {
     navLinks.querySelectorAll('a').forEach(link => {
         if (link.getAttribute('href').endsWith('#' + id)) {
-            link.setAttribute('aria-current', 'true');
+            link.setAttribute('aria-current', 'location');
         } else {
             link.removeAttribute('aria-current');
         }

@@ -172,7 +172,7 @@
             <form class="contact-form slide-up" id="contactForm" action="" method="POST" novalidate>
                 <p class="form-hint">Les champs marqués d'un * sont obligatoires.</p>
                 <input type="hidden" name="_subject" value="Nouveau message depuis le portfolio">
-                <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <input type="text" name="_gotcha" hidden autocomplete="off">
                 <div class="form-group">
                     <label for="name">Nom complet *</label>
                     <input type="text" id="name" name="name" autocomplete="name" required>
@@ -258,6 +258,7 @@
         </div>
     </footer>
 
+    <div id="notification" class="notification" role="status"></div>
 </body>
 <script src="js/navigation.js"></script>
 <script src="js/contact.js"></script>

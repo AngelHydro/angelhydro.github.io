@@ -119,19 +119,16 @@ function clearFieldError(field) {
     }
 }
 
-// Notifications
+// Notifications : zone d'annonce présente dès le chargement (role="status" dans index.html),
+// pour que les lecteurs d'écran annoncent le texte quand il change.
+const notification = document.getElementById('notification');
+let notificationTimer;
 function showNotification(message, type) {
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
     notification.textContent = message;
-    notification.setAttribute('role', type === 'success' ? 'status' : 'alert');
-    
-    document.body.appendChild(notification);
-
-    // Animation d'entrée, puis sortie et suppression après 4 secondes
-    setTimeout(() => notification.classList.add('show'), 100);
-    setTimeout(() => {
+    notification.className = `notification ${type} show`;
+    clearTimeout(notificationTimer);
+    notificationTimer = setTimeout(() => {
         notification.classList.remove('show');
-        setTimeout(() => notification.remove(), 300);
-    }, 4000);
+        notification.textContent = '';
+    }, 8000); // 8 s : le temps de lire
 }
