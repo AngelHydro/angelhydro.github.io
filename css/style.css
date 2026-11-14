@@ -484,6 +484,7 @@ nav {
 }
 
 .tag {
+    font-family: 'Pixelify Sans';
     background: var(--or-tag);
     color: var(--texte-fonce);
     padding: 5px 12px;
