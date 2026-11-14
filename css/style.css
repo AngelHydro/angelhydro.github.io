@@ -5,10 +5,18 @@
 
 /* GLOBAL STYLES */
 
+/* Palette violet & or */
+:root {
+    --violet-nuit: #170A2B;   /* fond principal (remplace le noir) */
+    --violet: #2B1650;        /* sections À propos / Contact (remplace le gris) */
+    --violet-clair: #B3A3D4;  /* textes secondaires */
+    --violet-nav: rgba(34, 17, 63, 0.95); /* header / footer */
+}
+
 html, body {
     margin: 0;
     padding: 0;
-    background-color: black;
+    background-color: var(--violet-nuit);
     scroll-behavior: smooth;
 }
 
@@ -142,7 +150,7 @@ nav {
     justify-content: space-between; /* espace entre logo et liens */
     align-items: center;
     padding: 0 15px;
-    background-color: rgba(50, 50, 50, 0.95);
+    background-color: var(--violet-nav);
     z-index: 1000; /* Ajoute cette ligne pour que le header soit au-dessus de tout */
 }
 
@@ -236,14 +244,14 @@ nav {
 }
 .home-content h1 span {
     font-size: 40px;
-    color: gray;
+    color: var(--violet-clair);
 }
 
 /* A propos */
 .about {
     width: 100%;
     height: auto; /* hauteur automatique pour s'adapter au contenu */
-    background-color: gray;
+    background-color: var(--violet);
     padding-top: 75px; /* espace au-dessus du contenu */
 }
 .about p {
@@ -477,7 +485,7 @@ nav {
 .contact {
     width: auto;
     min-height: 110vh;
-    background: gray;
+    background: var(--violet);
     padding-top: 75px;
     padding-bottom: 50px;
 }
@@ -653,8 +661,8 @@ nav {
 /* Blog */
 .blog {
     width: 100%;
-    height: 110vh;
-    background-color: black;
+    min-height: 110vh;
+    background-color: var(--violet-nuit);
     padding-top: 75px; /* espace au-dessus du contenu */
 }
 .blog-content {
@@ -666,13 +674,56 @@ nav {
 }
 
 
+/* Blog : cartes dans le style des cartes projets */
+.blog-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    width: 100%;
+}
+.blog-card {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 25px;
+    background: #EFD068;
+    border: 2px solid #B8861B;
+    border-radius: 15px;
+    text-align: left;
+}
+.blog-card:hover {
+    background: #EBC85C;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.blog-card h3 {
+    font-size: 24px;
+    color: #2B2B2B;
+}
+.blog-card p {
+    font-size: 16px;
+    color: #2B2B2B;
+}
+.blog-date {
+    align-self: flex-start;
+    font-family: 'Bitcount';
+    font-size: 14px;
+    color: gold;
+    background: var(--violet);
+    padding: 5px 12px;
+    border-radius: 15px;
+}
+
+
 /* Footer */
 footer {
     align-items: center;
     text-align: center;
     padding: 15px 15px;
     gap: 10px; /* espace entre les éléments */
-    background-color: rgba(50, 50, 50, 0.95);
+    background-color: var(--violet-nav);
 }
 footer span {
     font-family: 'Pixelify Sans';
@@ -707,7 +758,7 @@ main {
         left: 0;
         width: 100vw; /* prend toute la largeur de l'écran */
         z-index: 2000; /* plus haut que .nav-links */
-        background-color: rgba(50, 50, 50, 0.95);
+        background-color: var(--violet-nav);
     }
 
     .logo {
@@ -742,7 +793,7 @@ main {
         left: 0;
         width: 100vw;
         height: calc(100vh - 80px); /* prend tout sauf le header */
-        background: rgba(50, 50, 50, 0.95);
+        background: var(--violet-nav);
         flex-direction: column; /* alignement vertical */
         align-items: center;
         justify-content: flex-start; /* aligne les éléments en haut */
@@ -890,6 +941,14 @@ main {
     }
 
     /* Blog */
+    .blog {
+        min-height: 100vh;
+        padding-bottom: 50px;
+    }
+    .blog-grid {
+        grid-template-columns: 1fr;
+        padding: 0 40px;
+    }
 
 
     /* Footer */
