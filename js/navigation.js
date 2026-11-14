@@ -1,5 +1,14 @@
 const navLinks = document.querySelector('.nav-links');
 
+// Hauteur réelle du header, utilisée en CSS pour que les sections arrivent juste dessous
+const header = document.querySelector('nav');
+function updateHeaderHeight() {
+    document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+}
+updateHeaderHeight();
+addEventListener('resize', updateHeaderHeight);
+if (document.fonts) document.fonts.ready.then(updateHeaderHeight);
+
 // Liens internes (#section) : défilement vers la section sans recharger la page.
 // Évite aussi le rechargement de la page entière quand le site est affiché dans un cadre.
 document.addEventListener('click', (e) => {
