@@ -31,18 +31,22 @@
     <main id="main" tabindex="-1">
     <!-- Section Home -->
     <div class="home" id="home">
+        <canvas class="hero-fx" aria-hidden="true"></canvas>
         <div class="home-content">
             <img src="data/img/logo.webp" width="338" height="329" fetchpriority="high" alt="" class="scale-in">
             <div class="hero-text">
                 <!-- edit:accueil -->
                 <h1 class="fade-in">Angel SANCHEZ <br> <span>Développeur</span></h1>
+                <p class="hero-tagline fade-in">Lycéen en NSI à Dijon, je crée des sites web sur mesure, soignés et accessibles.</p>
                 <!-- /edit:accueil -->
+                <p class="hero-term fade-in" aria-hidden="true"><span class="hero-prompt">angel@dijon:~$</span> <span class="typed"></span></p>
                 <div class="hero-cta fade-in">
                     <a href="#portfolio">Voir mes projets</a>
                     <a href="#contact">Me contacter</a>
                 </div>
             </div>
         </div>
+        <a class="press-start" href="#about">Appuyez sur Start</a>
     </div>
 
     <!-- Section About -->
@@ -151,7 +155,7 @@
                 
                 <div class="contact-details">
                     <div class="contact-item slide-up">
-                        <div class="contact-icon" aria-hidden="true">📧</div>
+                        <div class="contact-icon" aria-hidden="true"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><path d="M1 3h14v10H1zM2 4v1h1v1h1v1h1v1h1v1h4V8h1V7h1V6h1V5h1V4zm0 3v5h12V7h-1v1h-1v1h-1v1H5V9H4V8H3V7z"/></svg></div>
                         <div>
                             <h4>Email</h4>
                             <p><a href="mailto:sanchez.angel.contact@proton.me">sanchez.angel.contact<wbr>@proton.me</a></p>
@@ -159,7 +163,7 @@
                     </div>
                     
                     <div class="contact-item slide-up">
-                        <div class="contact-icon" aria-hidden="true">📱</div>
+                        <div class="contact-icon" aria-hidden="true"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><path d="M4 1h8v14H4zm1 2v9h6V3zm2 10v1h2v-1z"/></svg></div>
                         <div>
                             <h4>Téléphone</h4>
                             <p><a href="tel:+33617604863">06 17 60 48 63</a></p>
@@ -168,7 +172,7 @@
                     
                     <a target="_blank" rel="noopener" aria-label="Localisation : Dijon, France (ouvre Google Maps dans un nouvel onglet)" href="https://www.google.com/maps/place/Dijon">
                         <div class="contact-item slide-up">
-                            <div class="contact-icon" aria-hidden="true">📍</div>
+                            <div class="contact-icon" aria-hidden="true"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><path d="M6 1h4v1h1v1h1v5h-1v2h-1v2H9v2H7v-2H6v-2H5V8H4V3h1V2h1zm1 3v3h2V4z"/></svg></div>
                             <div>
                                 <h4>Localisation</h4>
                                 <p>Dijon, France</p>
@@ -256,15 +260,16 @@
 
     </main>
     <footer>
+        <a class="continuer" href="#home">Continuer ?</a>
         <div class="footer-content">
             <span>Angel SANCHEZ</span>
-            <span> - </span>
+            <span aria-hidden="true"> · </span>
             <span>Développeur</span>
-            <span> - </span>
+            <span aria-hidden="true"> · </span>
             <span><a href="tel:+33617604863">06 17 60 48 63</a></span>
-            <span> - </span>
+            <span aria-hidden="true"> · </span>
             <span><a href="mailto:sanchez.angel.contact@proton.me">sanchez.angel.contact@proton.me</a></span>
-            <span> | </span>
+            <span aria-hidden="true"> · </span>
             <span><a href="ml.html">Mentions légales</a></span>
         </div>
     </footer>
@@ -273,6 +278,7 @@
 </body>
 <script src="js/navigation.js"></script>
 <script src="js/contact.js"></script>
+<script src="js/fx.js"></script>
 
 </html>
 
