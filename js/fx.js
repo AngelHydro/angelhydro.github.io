@@ -7,7 +7,7 @@ const calme = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const admin = new URLSearchParams(location.search).has('admin');
 const survol = matchMedia('(hover: hover)').matches;
 
-// --- Accueil : champ d'étoiles pixel qui monte, avec un léger parallaxe à la souris ---
+// --- Accueil : quelques étoiles pixel rares qui montent, avec un léger parallaxe à la souris ---
 const ciel = document.querySelector('.hero-fx');
 if (ciel) {
     const ctx = ciel.getContext('2d');
@@ -18,7 +18,7 @@ if (ciel) {
     function dimensionner() {
         w = ciel.width = Math.ceil(ciel.clientWidth / ECHELLE);
         h = ciel.height = Math.ceil(ciel.clientHeight / ECHELLE);
-        etoiles = Array.from({ length: Math.round(w * h / 160) }, () => ({
+        etoiles = Array.from({ length: Math.round(w * h / 1400) }, () => ({
             x: Math.random() * w,
             y: Math.random() * h,
             z: Math.random() * 0.8 + 0.2, // profondeur : vitesse, taille et opacité
@@ -31,10 +31,9 @@ if (ciel) {
         ctx.clearRect(0, 0, w, h);
         for (const e of etoiles) {
             const scintille = Math.sin(t / 500 + e.p) > 0.7 ? 0.35 : 1;
-            const taille = e.z > 0.85 ? 2 : 1;
             ctx.globalAlpha = e.z * scintille;
             ctx.fillStyle = e.c;
-            ctx.fillRect(Math.round(e.x + mx * e.z * 6), Math.round(e.y + my * e.z * 6), taille, taille);
+            ctx.fillRect(Math.round(e.x + mx * e.z * 6), Math.round(e.y + my * e.z * 6), 1, 1);
         }
     }
     function boucle(t) {

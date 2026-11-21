@@ -1313,8 +1313,7 @@ main > div > h2 {
 /* Accueil : écran bombé et allumage */
 .home {
     background:
-        radial-gradient(ellipse at center, rgba(235, 192, 106, 0.10) 0, transparent 45%, rgba(0, 0, 0, 0.6) 100%),
-        conic-gradient(at 3px 3px, transparent 75%, rgba(235, 192, 106, 0.2) 0) 0 0 / 24px 24px,
+        radial-gradient(ellipse at center, rgba(235, 192, 106, 0.06) 0, transparent 55%),
         var(--violet-nuit);
 }
 .home-content {
@@ -1367,6 +1366,7 @@ h1, h2, h3 { text-wrap: balance; }
     height: 100%;
     image-rendering: pixelated;
     pointer-events: none;
+    opacity: 0.6; /* étoiles discrètes : le fond ne doit pas voler la vedette */
 }
 .home-content {
     position: relative; /* au-dessus du champ d'étoiles */
