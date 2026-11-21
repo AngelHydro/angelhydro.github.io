@@ -1250,7 +1250,8 @@ main > div > h2::after {
     border: 3px solid var(--texte-fonce);
     box-shadow: 6px 6px 0 var(--or);
     --penche: 2deg; /* sens de l'inclinaison : d'un côté puis de l'autre */
-    transition: rotate 0.2s steps(4), box-shadow 0.2s steps(4);
+    /* garde aussi le fondu d'apparition de .scale-in (sinon la photo surgit d'un coup) */
+    transition: opacity 0.6s ease, transform 0.6s ease, rotate 0.2s steps(4), box-shadow 0.2s steps(4);
 }
 .about-content2 img {
     --penche: -2deg;
@@ -1268,15 +1269,17 @@ main > div > h2::after {
     @media (prefers-reduced-motion: no-preference) {
         .about-content img,
         .about-content2 img {
-            animation: photo-posee linear both;
+            opacity: 1; /* l'apparition est gérée par le défilement, plus par .scale-in */
+            animation: photo-posee ease-out both;
             animation-timeline: view();
             animation-range: entry 0% cover 45%;
         }
     }
 }
 @keyframes photo-posee {
-    from { transform: translateY(32px) rotate(calc(var(--penche) * 3)); }
-    to { transform: none; }
+    from { opacity: 0; transform: translateY(40px) scale(0.94) rotate(calc(var(--penche) * 3)); }
+    40% { opacity: 1; }
+    to { opacity: 1; transform: none; }
 }
 .about > p {
     box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
