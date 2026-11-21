@@ -70,7 +70,12 @@ if (hashTarget) {
     setTimeout(stop, 3000);
 }
 addEventListener('scrollend', () => { if (lockedId) releaseLock(); });
-addEventListener('scroll', () => requestAnimationFrame(updateActive), { passive: true });
+let scrollPrevu = false; // une seule mise à jour par image, même si 'scroll' arrive plusieurs fois
+addEventListener('scroll', () => {
+    if (scrollPrevu) return;
+    scrollPrevu = true;
+    requestAnimationFrame(() => { scrollPrevu = false; updateActive(); });
+}, { passive: true });
 addEventListener('resize', updateActive);
 
 // Fonctionnalité de filtrage du portfolio
