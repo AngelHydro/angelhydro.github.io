@@ -135,6 +135,10 @@ document.addEventListener('DOMContentLoaded', () => {
     updateActive();
 });
 
+// Efface à chaque visite le jeton qu'une ancienne version du mode administrateur pouvait mémoriser
+// (localStorage est partagé avec les autres dépôts publiés sur angelhydro.github.io/<dépôt>/)
+try { localStorage.removeItem('admin-token'); } catch { /* stockage bloqué par le navigateur : rien à effacer */ }
+
 // Mode administrateur (index.html?admin) : chargé seulement à la demande, rien pour les visiteurs
 if (new URLSearchParams(location.search).has('admin') && document.querySelector('.portfolio-grid')) {
     document.head.append(Object.assign(document.createElement('script'), { src: 'js/admin.js' }));

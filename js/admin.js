@@ -9,7 +9,6 @@ const REPO = 'AngelHydro/angelhydro.github.io';
 const BRANCH = 'main';
 const API = `https://api.github.com/repos/${REPO}/contents/`;
 const EDITABLE = 'h1, h2, h3, p, .tag, .blog-date';
-localStorage.removeItem('admin-token'); // efface un jeton mémorisé par une ancienne version
 let token = sessionStorage.getItem('admin-token');
 let dirty = false;
 

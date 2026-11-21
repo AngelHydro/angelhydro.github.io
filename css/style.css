@@ -33,7 +33,6 @@
     --or-bord-fonce: #94691F;
     --texte-fonce: #1E1A24;   /* texte posé sur le doré */
     /* Style « rétro net » : coins droits et ombres pixel franches, sans flou */
-    --px: 4px;
     --ombre: 4px 4px 0 var(--texte-fonce);
     --ombre-haute: 8px 8px 0 var(--texte-fonce);
 }
@@ -295,14 +294,10 @@ nav {
     gap: 60px;
     text-align: left;
 }
-.home-content img {
-    width: 220px;
-}
 .home-content h1 {
     margin: 0;
 }
 .home-content h1 span {
-    font-size: 40px;
     color: var(--violet-clair);
 }
 
@@ -1035,9 +1030,6 @@ p a { text-decoration: underline; text-underline-offset: 3px; }
         min-height: 100vh; /* le header est posé par-dessus l'accueil sur téléphone */
         min-height: 100svh;
     }
-    .home-content img {
-        width: 140px;
-    }
     .hero-text {
         align-items: center;
     }
@@ -1071,7 +1063,6 @@ p a { text-decoration: underline; text-underline-offset: 3px; }
     }
     .home-content h1 {
         margin-top: 0; margin-bottom: 0; margin-left: 25px; margin-right: 25px;
-        font-size: 40px;
         text-align: center;
         justify-content: center;
     }
@@ -1178,11 +1169,6 @@ p a { text-decoration: underline; text-underline-offset: 3px; }
 }
 
 /* Accueil : grille de pixels discrète qui s'efface vers les bords */
-.home {
-    background:
-        radial-gradient(ellipse at center, transparent 0, var(--violet-nuit) 70%),
-        conic-gradient(at 3px 3px, transparent 75%, rgba(235, 192, 106, 0.14) 0) 0 0 / 24px 24px;
-}
 .home-content img {
     width: 260px;
 }
