@@ -8,11 +8,13 @@ const admin = new URLSearchParams(location.search).has('admin');
 const survol = matchMedia('(hover: hover)').matches;
 
 // --- Accueil : trame qui ondule comme de l'eau au passage de la souris (ou du doigt) ---
-// data-fond="points" : points dorés ; data-fond="caracteres" : caractères violets.
+// data-fond="points" : points dorés ; "caracteres" : caractères violets ;
+// "mixte" : points dorés qui deviennent des caractères de code quand la vague passe.
 const ciel = document.querySelector('.hero-fx');
 if (ciel) {
     const ctx = ciel.getContext('2d');
     const enCaracteres = ciel.dataset.fond === 'caracteres';
+    const mixte = ciel.dataset.fond === 'mixte'; // points au repos, caractères au passage de la vague
     const PAS = enCaracteres ? 22 : 24;            // écart entre deux cases de la trame
     const GLYPHES = '01{}<>/=+-*;:.#$';            // caractères de la trame, au hasard
     const DENSES = '.:+*#@';                        // du plus calme au plus agité
@@ -56,6 +58,11 @@ if (ciel) {
                 ctx.fillStyle = force > 0.55 ? '#EBC06A' : '#C0B2D8';
                 ctx.globalAlpha = 0.16 + force * 0.84;
                 ctx.fillText(force > 0.08 ? DENSES[Math.min(DENSES.length - 1, force * DENSES.length | 0)] : c.g, x, y);
+            } else if (mixte && force > 0.12) {
+                // la vague révèle le code caché sous les points
+                ctx.fillStyle = force > 0.5 ? '#FFFFFF' : '#EBC06A';
+                ctx.globalAlpha = 0.35 + force * 0.65;
+                ctx.fillText(c.g, x, y);
             } else {
                 const taille = 2 + Math.round(force * 4);
                 ctx.fillStyle = '#EBC06A';
