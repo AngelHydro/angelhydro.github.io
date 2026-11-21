@@ -7,56 +7,87 @@ const calme = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const admin = new URLSearchParams(location.search).has('admin');
 const survol = matchMedia('(hover: hover)').matches;
 
-// --- Accueil : quelques étoiles pixel rares qui montent, avec un léger parallaxe à la souris ---
+// --- Accueil : trame qui ondule comme de l'eau au passage de la souris (ou du doigt) ---
+// data-fond="points" : points dorés ; data-fond="caracteres" : caractères violets.
 const ciel = document.querySelector('.hero-fx');
 if (ciel) {
     const ctx = ciel.getContext('2d');
-    const COULEURS = ['#EBC06A', '#C0B2D8', '#FFFFFF'];
-    const ECHELLE = 4; // 1 pixel du canvas = 4 pixels à l'écran (rendu « pixelated »)
-    let w, h, etoiles = [], mx = 0, my = 0, actif = false;
+    const enCaracteres = ciel.dataset.fond === 'caracteres';
+    const PAS = enCaracteres ? 22 : 24;            // écart entre deux cases de la trame
+    const GLYPHES = '01{}<>/=+-*;:.#$';            // caractères de la trame, au hasard
+    const DENSES = '.:+*#@';                        // du plus calme au plus agité
+    const VITESSE = 420, LARGEUR = 46, DUREE = 2.2; // vague : px/s, épaisseur de l'anneau, secondes de vie
+    let w, h, dpr, cases = [], ondes = [], souris = null, actif = false, enCours = false, dernier = 0;
 
     function dimensionner() {
-        w = ciel.width = Math.ceil(ciel.clientWidth / ECHELLE);
-        h = ciel.height = Math.ceil(ciel.clientHeight / ECHELLE);
-        etoiles = Array.from({ length: Math.round(w * h / 1400) }, () => ({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            z: Math.random() * 0.8 + 0.2, // profondeur : vitesse, taille et opacité
-            c: COULEURS[Math.random() * COULEURS.length | 0],
-            p: Math.random() * 6, // phase du scintillement
-        }));
-        dessiner(0);
+        dpr = Math.min(devicePixelRatio || 1, 2);
+        w = ciel.clientWidth; h = ciel.clientHeight;
+        ciel.width = Math.round(w * dpr); ciel.height = Math.round(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.font = '600 14px "Pixelify Sans", monospace';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        cases = [];
+        for (let y = PAS / 2; y < h; y += PAS) for (let x = PAS / 2; x < w; x += PAS) {
+            cases.push({ x, y, g: GLYPHES[Math.random() * GLYPHES.length | 0] });
+        }
+        dessiner(performance.now());
     }
     function dessiner(t) {
         ctx.clearRect(0, 0, w, h);
-        for (const e of etoiles) {
-            const scintille = Math.sin(t / 500 + e.p) > 0.7 ? 0.35 : 1;
-            ctx.globalAlpha = e.z * scintille;
-            ctx.fillStyle = e.c;
-            ctx.fillRect(Math.round(e.x + mx * e.z * 6), Math.round(e.y + my * e.z * 6), 1, 1);
+        ondes = ondes.filter(o => (t - o.t) / 1000 < DUREE);
+        for (const c of cases) {
+            let force = 0, dx = 0, dy = 0;
+            for (const o of ondes) {
+                const age = (t - o.t) / 1000;
+                const ex = c.x - o.x, ey = c.y - o.y, d = Math.hypot(ex, ey) || 1;
+                const ecart = d - age * VITESSE;
+                // anneau qui s'élargit, avec une petite crête secondaire, et qui s'éteint avec le temps
+                const vague = Math.exp(-(ecart * ecart) / (LARGEUR * LARGEUR)) * Math.cos(ecart / 14) * Math.exp(-age * 1.6);
+                force += Math.abs(vague);
+                dx += ex / d * vague * 7; dy += ey / d * vague * 7;
+            }
+            if (souris) { // halo léger sous le pointeur
+                const d = Math.hypot(c.x - souris.x, c.y - souris.y);
+                force += Math.exp(-(d * d) / 9000) * 0.5;
+            }
+            force = Math.min(force, 1);
+            const x = c.x + dx, y = c.y + dy;
+            if (enCaracteres) {
+                ctx.fillStyle = force > 0.55 ? '#EBC06A' : '#C0B2D8';
+                ctx.globalAlpha = 0.16 + force * 0.84;
+                ctx.fillText(force > 0.08 ? DENSES[Math.min(DENSES.length - 1, force * DENSES.length | 0)] : c.g, x, y);
+            } else {
+                const taille = 2 + Math.round(force * 4);
+                ctx.fillStyle = '#EBC06A';
+                ctx.globalAlpha = 0.22 + force * 0.78;
+                ctx.fillRect(Math.round(x - taille / 2), Math.round(y - taille / 2), taille, taille);
+            }
         }
+        ctx.globalAlpha = 1;
     }
+    // l'animation ne tourne que tant qu'une onde est en vie (sinon : image fixe, aucun calcul)
     function boucle(t) {
-        if (!actif) return;
-        for (const e of etoiles) {
-            e.y -= e.z * 0.12;
-            if (e.y < -2) { e.y = h + 2; e.x = Math.random() * w; }
-        }
         dessiner(t);
-        requestAnimationFrame(boucle);
+        enCours = actif && (ondes.length > 0 || souris !== null);
+        if (enCours) requestAnimationFrame(boucle);
+    }
+    function relancer() { if (actif && !enCours) { enCours = true; requestAnimationFrame(boucle); } }
+    function onde(e, forcer) {
+        const r = ciel.getBoundingClientRect();
+        const p = { x: e.clientX - r.left, y: e.clientY - r.top, t: performance.now() };
+        if (survol) souris = p;
+        if (forcer || p.t - dernier > 140) { ondes.push(p); dernier = p.t; if (ondes.length > 12) ondes.shift(); }
+        relancer();
     }
     dimensionner();
     new ResizeObserver(dimensionner).observe(ciel);
+    document.fonts?.ready.then(dimensionner); // redessine une fois la police pixel chargée
     if (!calme) {
-        // ne tourne que lorsque l'accueil est visible
-        new IntersectionObserver(([entree]) => {
-            actif = entree.isIntersecting;
-            if (actif) requestAnimationFrame(boucle);
-        }).observe(ciel);
-        if (survol) ciel.parentElement.addEventListener('pointermove', (e) => {
-            mx = e.clientX / innerWidth - 0.5;
-            my = e.clientY / innerHeight - 0.5;
-        }, { passive: true });
+        new IntersectionObserver(([entree]) => { actif = entree.isIntersecting; relancer(); }).observe(ciel);
+        const accueil = ciel.parentElement;
+        accueil.addEventListener('pointermove', (e) => onde(e, false), { passive: true });
+        accueil.addEventListener('pointerdown', (e) => onde(e, true), { passive: true });
+        accueil.addEventListener('pointerleave', () => { souris = null; });
     }
 }
 

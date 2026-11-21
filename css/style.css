@@ -1364,9 +1364,10 @@ h1, h2, h3 { text-wrap: balance; }
     inset: 0;
     width: 100%;
     height: 100%;
-    image-rendering: pixelated;
     pointer-events: none;
-    opacity: 0.6; /* étoiles discrètes : le fond ne doit pas voler la vedette */
+    /* la trame s'estompe vers les bords de l'écran */
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 85%);
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 85%);
 }
 .home-content {
     position: relative; /* au-dessus du champ d'étoiles */
