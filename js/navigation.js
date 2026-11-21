@@ -70,7 +70,12 @@ if (hashTarget) {
     setTimeout(stop, 3000);
 }
 addEventListener('scrollend', () => { if (lockedId) releaseLock(); });
-addEventListener('scroll', () => requestAnimationFrame(updateActive), { passive: true });
+let scrollPrevu = false; // une seule mise à jour par image, même si 'scroll' arrive plusieurs fois
+addEventListener('scroll', () => {
+    if (scrollPrevu) return;
+    scrollPrevu = true;
+    requestAnimationFrame(() => { scrollPrevu = false; updateActive(); });
+}, { passive: true });
 addEventListener('resize', updateActive);
 
 // Fonctionnalité de filtrage du portfolio
@@ -129,6 +134,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateActive();
 });
+
+// Efface à chaque visite le jeton qu'une ancienne version du mode administrateur pouvait mémoriser
+// (localStorage est partagé avec les autres dépôts publiés sur angelhydro.github.io/<dépôt>/)
+try { localStorage.removeItem('admin-token'); } catch { /* stockage bloqué par le navigateur : rien à effacer */ }
 
 // Mode administrateur (index.html?admin) : chargé seulement à la demande, rien pour les visiteurs
 if (new URLSearchParams(location.search).has('admin') && document.querySelector('.portfolio-grid')) {

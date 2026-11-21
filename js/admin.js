@@ -2,35 +2,15 @@
 // Modifie les textes, les projets, les articles et les images directement sur la page,
 // puis enregistre index.html (et les nouvelles images) dans le dépôt GitHub.
 // Seules les zones entre <!-- edit:nom --> et <!-- /edit:nom --> sont réécrites.
-// ponytail: jeton GitHub stocké dans le navigateur ; un vrai backend OAuth si plusieurs personnes éditent un jour.
+// ponytail: jeton GitHub gardé le temps de l'onglet (sessionStorage) ; un vrai backend OAuth si plusieurs personnes éditent un jour.
+// Jamais dans localStorage : les autres dépôts publiés sur angelhydro.github.io/<dépôt>/ partagent la même origine, donc le même stockage.
 
 const REPO = 'AngelHydro/angelhydro.github.io';
 const BRANCH = 'main';
 const API = `https://api.github.com/repos/${REPO}/contents/`;
 const EDITABLE = 'h1, h2, h3, p, .tag, .blog-date';
-let token = localStorage.getItem('admin-token') || sessionStorage.getItem('admin-token');
+let token = sessionStorage.getItem('admin-token');
 let dirty = false;
-
-const css = `
-.admin-bar { position: sticky; z-index: 999; top: var(--header-h); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding: 8px 16px; background: var(--violet-nuit); border-bottom: 2px solid var(--or); font-family: 'Pixelify Sans'; color: white; }
-.admin-bar button { white-space: nowrap; }
-html[data-admin] { scroll-padding-top: calc(var(--header-h) + var(--admin-h, 0px)); }
-@media (max-width: 768px) { .admin-bar { padding: 6px 12px; gap: 6px; } .admin-bar button { font-size: 13px; padding: 4px 8px; } }
-.admin-bar strong { color: var(--or); margin-right: auto; }
-.admin-ui button, .admin-bar button, .admin-dialog button { font: inherit; font-size: 15px; padding: 6px 12px; border-radius: 8px; border: 2px solid var(--or); background: var(--violet-nuit); color: white; cursor: pointer; }
-.admin-bar button.primary, .admin-dialog button.primary { background: var(--or); color: var(--texte-fonce); }
-.admin-ui { display: flex; gap: 6px; flex-wrap: wrap; padding: 8px; font-family: 'Pixelify Sans'; }
-.admin-ui button { font-size: 13px; padding: 4px 8px; }
-[data-admin] [contenteditable] { outline: 1px dashed rgba(235, 192, 106, 0.6); outline-offset: 2px; cursor: text; }
-[data-admin] [contenteditable]:focus { outline: 2px solid var(--or); }
-[data-admin] .project-overlay { display: none; }
-.admin-dialog { border: 2px solid var(--or); border-radius: 12px; background: var(--violet-nuit); color: white; font-family: 'Pixelify Sans'; max-width: min(460px, calc(100vw - 32px)); }
-.admin-dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
-.admin-dialog label { display: block; margin: 12px 0 6px; }
-.admin-dialog input[type=password] { width: 100%; box-sizing: border-box; padding: 8px; border-radius: 8px; border: 2px solid var(--violet-clair); background: transparent; color: white; font: inherit; }
-.admin-dialog a { color: var(--or); }
-.admin-dialog .actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px; }
-`;
 
 // ---------- GitHub ----------
 async function gh(path, options = {}) {
@@ -54,12 +34,11 @@ function askToken() {
         dialog.setAttribute('aria-labelledby', 'admin-title');
         dialog.innerHTML = `
             <form method="dialog">
-                <h2 id="admin-title" style="font-size:24px;padding:0">Mode administrateur</h2>
+                <h2 id="admin-title">Mode administrateur</h2>
                 <p>Colle un jeton GitHub avec l'accès <em>Contents : Read and write</em> sur ${REPO}.
                 <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Créer un jeton<span class="sr-only"> (nouvel onglet)</span></a></p>
                 <label for="admin-token">Jeton</label>
                 <input type="password" id="admin-token" required autocomplete="off">
-                <label><input type="checkbox" id="admin-remember"> Se souvenir sur cet appareil (seulement sur un appareil personnel)</label>
                 <p role="alert" id="admin-error"></p>
                 <div class="actions"><button value="cancel" formnovalidate>Annuler</button><button class="primary" value="ok">Valider</button></div>
             </form>`;
@@ -71,7 +50,7 @@ function askToken() {
             try {
                 const repo = await fetch(`https://api.github.com/repos/${REPO}`, { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json());
                 if (!repo.permissions?.push) throw new Error('Ce jeton ne peut pas écrire dans le dépôt.');
-                (dialog.querySelector('#admin-remember').checked ? localStorage : sessionStorage).setItem('admin-token', token);
+                sessionStorage.setItem('admin-token', token);
                 dialog.close('ok');
             } catch (err) {
                 dialog.querySelector('#admin-error').textContent = err.message === 'Failed to fetch' ? 'GitHub injoignable.' : err.message;
@@ -245,8 +224,10 @@ async function save(bar) {
 (async () => {
     // Refuse de s'ouvrir dans un cadre (une autre page pourrait faire cliquer à l'aveugle sur « Enregistrer »)
     if (window.top !== window) return;
+    // Styles dans un fichier : la CSP n'autorise pas les styles en ligne
+    const style = Object.assign(document.createElement('link'), { rel: 'stylesheet', href: 'css/admin.css' });
+    await new Promise(r => { style.onload = style.onerror = r; document.head.append(style); });
     if (!token && !(await askToken())) return;
-    document.head.append(Object.assign(document.createElement('style'), { textContent: css }));
     document.documentElement.dataset.admin = '';
     const bar = document.createElement('div');
     bar.className = 'admin-bar';
@@ -255,7 +236,7 @@ async function save(bar) {
     saveButton.className = 'primary';
     bar.append(
         saveButton,
-        button('Oublier le jeton', () => { localStorage.removeItem('admin-token'); sessionStorage.removeItem('admin-token'); location.search = ''; }, false),
+        button('Oublier le jeton', () => { sessionStorage.removeItem('admin-token'); location.search = ''; }, false),
         button('Quitter', () => { location.search = ''; }, false),
     );
     document.querySelector('nav').after(bar);

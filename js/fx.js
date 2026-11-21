@@ -41,16 +41,17 @@ if (ciel) {
             let force = 0, dx = 0, dy = 0;
             for (const o of ondes) {
                 const age = (t - o.t) / 1000;
-                const ex = c.x - o.x, ey = c.y - o.y, d = Math.hypot(ex, ey) || 1;
+                const ex = c.x - o.x, ey = c.y - o.y, d = Math.sqrt(ex * ex + ey * ey) || 1;
                 const ecart = d - age * VITESSE;
+                if (ecart > 3 * LARGEUR || ecart < -3 * LARGEUR) continue; // loin de l'anneau : effet < 0,02 %, invisible
                 // anneau qui s'élargit, avec une petite crête secondaire, et qui s'éteint avec le temps
                 const vague = Math.exp(-(ecart * ecart) / (LARGEUR * LARGEUR)) * Math.cos(ecart / 14) * Math.exp(-age * 1.6);
                 force += Math.abs(vague);
                 dx += ex / d * vague * 7; dy += ey / d * vague * 7;
             }
             if (souris) { // halo léger sous le pointeur
-                const d = Math.hypot(c.x - souris.x, c.y - souris.y);
-                force += Math.exp(-(d * d) / 9000) * 0.5;
+                const sx = c.x - souris.x, sy = c.y - souris.y;
+                force += Math.exp(-(sx * sx + sy * sy) / 9000) * 0.5;
             }
             force = Math.min(force, 1);
             const x = c.x + dx, y = c.y + dy;
@@ -138,7 +139,8 @@ if (sections.length) {
         xp.textContent = String(Math.round(p * 1000)).padStart(4, '0') + ' XP';
         hud.classList.toggle('hud-cache', scrollY < 40);
     }
-    addEventListener('scroll', () => requestAnimationFrame(majHud), { passive: true });
+    let prevu = false; // une seule mise à jour par image, même si 'scroll' arrive plusieurs fois
+    addEventListener('scroll', () => { if (!prevu) { prevu = true; requestAnimationFrame(() => { prevu = false; majHud(); }); } }, { passive: true });
     addEventListener('resize', majHud);
     majHud();
 }
@@ -184,7 +186,7 @@ if (!calme && !admin) {
 const KONAMI = ['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright', 'arrowleft', 'arrowright', 'b', 'a'];
 let rang = 0;
 addEventListener('keydown', (e) => {
-    const touche = e.key.toLowerCase();
+    const touche = (e.key || '').toLowerCase(); // l'auto-remplissage de Chrome envoie des touches sans nom
     rang = touche === KONAMI[rang] ? rang + 1 : (touche === KONAMI[0] ? 1 : 0);
     if (rang < KONAMI.length) return;
     rang = 0;
