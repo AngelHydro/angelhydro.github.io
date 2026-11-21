@@ -1054,14 +1054,22 @@ p a { text-decoration: underline; text-underline-offset: 3px; }
     .about p {
         font-size: 17px;
     }
-    /* les paragraphes, puis les photos, puis la conclusion */
+    /* texte et photos alternés : paragraphe, photo, paragraphe, photo, paragraphe, conclusion */
+    .moi p:first-child { order: 1; }
+    .about-content img { order: 2; }
+    .moi p:nth-child(2) { order: 3; }
+    .about-content2 img { order: 4; }
+    .about-content2 p { order: 5; }
+    .about > p { order: 6; }
+    /* photos décalées d'un côté puis de l'autre, légèrement penchées comme des photos posées */
     .about-content img, .about-content2 img {
-        order: 1;
-        width: 75%;
-        align-self: center;
+        width: 72%;
+        align-self: flex-end;
+        rotate: 2deg;
     }
-    .about > p {
-        order: 2;
+    .about-content2 img {
+        align-self: flex-start;
+        rotate: -2deg;
     }
     .home-content h1 {
         margin-top: 0; margin-bottom: 0; margin-left: 25px; margin-right: 25px;
