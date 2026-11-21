@@ -1061,15 +1061,13 @@ p a { text-decoration: underline; text-underline-offset: 3px; }
     .about-content2 img { order: 4; }
     .about-content2 p { order: 5; }
     .about > p { order: 6; }
-    /* photos décalées d'un côté puis de l'autre, légèrement penchées comme des photos posées */
+    /* photos décalées d'un côté puis de l'autre */
     .about-content img, .about-content2 img {
         width: 72%;
         align-self: flex-end;
-        rotate: 2deg;
     }
     .about-content2 img {
         align-self: flex-start;
-        rotate: -2deg;
     }
     .home-content h1 {
         margin-top: 0; margin-bottom: 0; margin-left: 25px; margin-right: 25px;
@@ -1251,10 +1249,34 @@ main > div > h2::after {
     box-sizing: border-box;
     border: 3px solid var(--texte-fonce);
     box-shadow: 6px 6px 0 var(--or);
-    rotate: 2deg; /* photos posées, penchées d'un côté puis de l'autre (comme sur mobile) */
+    --penche: 2deg; /* sens de l'inclinaison : d'un côté puis de l'autre */
+    transition: rotate 0.2s steps(4), box-shadow 0.2s steps(4);
 }
 .about-content2 img {
-    rotate: -2deg;
+    --penche: -2deg;
+}
+/* Droites au repos ; elles se penchent au survol, comme une photo qu'on soulève */
+@media (hover: hover) {
+    .about-content img:hover,
+    .about-content2 img:hover {
+        rotate: var(--penche);
+        box-shadow: 9px 9px 0 var(--or);
+    }
+}
+/* Au défilement : la photo arrive penchée et se pose droite en atteignant le milieu de l'écran */
+@supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+        .about-content img,
+        .about-content2 img {
+            animation: photo-posee linear both;
+            animation-timeline: view();
+            animation-range: entry 0% cover 45%;
+        }
+    }
+}
+@keyframes photo-posee {
+    from { transform: translateY(32px) rotate(calc(var(--penche) * 3)); }
+    to { transform: none; }
 }
 .about > p {
     box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
