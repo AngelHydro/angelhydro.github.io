@@ -32,6 +32,10 @@
     --or-bord: #B98A2E;
     --or-bord-fonce: #94691F;
     --texte-fonce: #1E1A24;   /* texte posé sur le doré */
+    /* Style « rétro net » : coins droits et ombres pixel franches, sans flou */
+    --px: 4px;
+    --ombre: 4px 4px 0 var(--texte-fonce);
+    --ombre-haute: 8px 8px 0 var(--texte-fonce);
 }
 
 html, body {
@@ -186,7 +190,7 @@ img {
     padding: 10px 18px;
     background: var(--or);
     color: var(--texte-fonce);
-    border-radius: 0 0 10px 10px;
+    border-radius: 0;
 }
 .skip-link:focus {
     top: 0;
@@ -266,7 +270,7 @@ nav {
     padding: 10px 18px;
     margin-left: 16px;
     border: var(--or) solid 2px;
-    border-radius: 50px;
+    border-radius: 0;
 }
 .nav-links .nav-cta-button:hover {
     color: var(--texte-fonce);
@@ -332,7 +336,7 @@ nav {
     width: 100%;
     height: auto;
     align-self: start;
-    border-radius: 10px; /* arrondit les coins de l'image */
+    border-radius: 0; /* arrondit les coins de l'image */
 }
 .about-content img {
     grid-row: 2 / span 2;
@@ -345,7 +349,7 @@ nav {
     border-left: 4px solid var(--or);
     padding: 15px 25px;
     background: rgba(235, 192, 106, 0.09);
-    border-radius: 0 12px 12px 0;
+    border-radius: 0;
 }
 
 
@@ -380,15 +384,14 @@ nav {
     display: flex;
     flex-direction: column;
     background: var(--or-carte);
-    border-radius: 15px;
+    border-radius: 0;
     overflow: hidden;
-    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
-    border: 2px solid var(--or-bord);
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.2s steps(2), transform 0.2s steps(2); /* déplacement « pixel » en 2 crans */
+    border: 3px solid var(--texte-fonce);
+    box-shadow: var(--ombre);
     z-index: 1; /* Ajoute cette ligne pour s'assurer que les cartes restent en dessous du header */
-    /* Animation d'apparition */
-    animation: fadeInUp 0.6s ease forwards;
-    opacity: 0;
-    transform: translateY(30px);
+    /* Animation d'apparition (seulement le départ : le survol garde la main sur transform ensuite) */
+    animation: fadeInUp 0.6s ease backwards;
 }
 
 .project-card:nth-child(1) { animation-delay: 0.1s; }
@@ -396,22 +399,22 @@ nav {
 .project-card:nth-child(3) { animation-delay: 0.3s; }
 
 @keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    from {
+        opacity: 0;
+        transform: translateY(30px);
     }
 }
 .project-card:hover {
     background: var(--or-carte-survol);
     color: black;
-    transform: translateY(-10px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    border-color: var(--or-bord);
+    transform: translate(-4px, -4px);
+    box-shadow: var(--ombre-haute);
 }
 .project-image {
     position: relative;
     height: 200px;
     overflow: hidden;
+    border-bottom: 3px solid var(--texte-fonce);
 }
 .project-image img {
     width: 100%;
@@ -444,16 +447,15 @@ nav {
     background:  var(--or-carte);
     color:  var(--texte-fonce);
     padding: 10px 20px;
-    border-radius: 25px;
+    border-radius: 0;
     font-weight: 600;
-    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
-    border: 2px solid var(--or-bord);
+    transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.15s ease, transform 0.15s ease; /* effets de survol uniquement */
+    border: 3px solid var(--texte-fonce);
+    box-shadow: 4px 4px 0 var(--or);
 }
 .project-link:hover {
     background: var(--or-carte-survol);
     color: black;
-    border-color: var(--or-bord);
-    transform: scale(1.05);
 }
 
 .project-info {
@@ -487,11 +489,11 @@ nav {
     font-family: 'Pixelify Sans';
     background: var(--or-tag);
     color: var(--texte-fonce);
-    padding: 5px 12px;
-    border-radius: 15px;
-    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 0;
+    font-size: 13px;
     font-weight: 600;
-    border: 1px solid var(--or-bord-fonce);
+    border: 2px solid var(--texte-fonce);
     transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
 }
 .tag:hover {
@@ -511,22 +513,26 @@ nav {
 .filter-btn {
     background: var(--or-carte);
     color: var(--texte-fonce);
-    border: 2px solid var(--or-bord);
+    border: 3px solid var(--texte-fonce);
+    box-shadow: var(--ombre);
     padding: 12px 24px;
-    border-radius: 25px;
+    border-radius: 0;
     cursor: pointer;
-    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
+    transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.12s ease, transform 0.12s ease; /* effets de survol uniquement */
     font-family: 'Pixelify Sans';
     font-size: 16px;
     font-weight: 600;
     z-index: 1; /* Ajoute cette ligne pour s'assurer que les boutons restent en dessous du header */
 }
-.filter-btn:hover,
+.filter-btn:hover {
+    background: var(--or-carte-survol);
+}
+/* Filtre actif : bouton « enfoncé » et inversé */
 .filter-btn.active {
-    background: var(--or-tag);
-    color: var(--texte-fonce);
-    border-color: var(--or-bord-fonce);
-    transform: scale(1.05);
+    background: var(--texte-fonce);
+    color: var(--or);
+    transform: translate(4px, 4px);
+    box-shadow: none;
 }
 
 
@@ -577,14 +583,15 @@ nav {
     gap: 15px;
     padding: 20px;
     background: rgba(235, 192, 106, 0.09);
-    border-radius: 12px;
+    border-radius: 0;
     border: 2px solid rgba(235, 192, 106, 0.35);
     transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* effets de survol uniquement */
 }
 .contact-item:hover {
     background: rgba(235, 192, 106, 0.15);
     border-color: var(--or);
-    transform: translateX(10px);
+    transform: translate(-4px, -4px);
+    box-shadow: 4px 4px 0 var(--or);
 }
 .contact-item h4 {
     font-family: 'Bitcount';
@@ -600,7 +607,14 @@ nav {
     overflow-wrap: anywhere;
 }
 
+.contact-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--or);
+    fill-rule: evenodd;
+}
 .contact-icon {
+    flex: none;
     font-size: 24px;
     width: 50px;
     height: 50px;
@@ -608,7 +622,7 @@ nav {
     align-items: center;
     justify-content: center;
     background: rgba(235, 192, 106, 0.22);
-    border-radius: 50%;
+    border-radius: 0;
     border: 2px solid var(--or);
 }
 /* Formulaire */
@@ -619,7 +633,7 @@ nav {
 .contact-form {
     background: rgba(235, 192, 106, 0.09);
     padding: 40px;
-    border-radius: 20px;
+    border-radius: 0;
     border: 2px solid rgba(235, 192, 106, 0.35);
 }
 
@@ -641,7 +655,7 @@ nav {
     padding: 15px;
     background: rgba(255, 255, 255, 0.08);
     border: 2px solid rgba(235, 192, 106, 0.4);
-    border-radius: 10px;
+    border-radius: 0;
     color: white;
     font-family: 'Pixelify Sans';
     font-size: 16px;
@@ -690,7 +704,7 @@ nav {
     right: 20px;
     z-index: 10000;
     padding: 15px 25px;
-    border-radius: 8px;
+    border-radius: 0;
     color: white;
     font-family: 'Pixelify Sans';
     font-size: 16px;
@@ -710,8 +724,9 @@ nav {
     padding: 18px;
     background: var(--or);
     color: var(--texte-fonce);
-    border: none;
-    border-radius: 12px;
+    border: 3px solid var(--texte-fonce);
+    box-shadow: 4px 4px 0 var(--texte-fonce);
+    border-radius: 0;
     font-family: 'Bitcount';
     font-size: 18px;
     font-weight: 600;
@@ -721,11 +736,11 @@ nav {
     overflow: hidden;
 }
 .submit-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(235, 192, 106, 0.5);
+    background: var(--or-carte-survol);
 }
 .submit-btn:active {
-    transform: translateY(-1px);
+    transform: translate(4px, 4px);
+    box-shadow: none;
 }
 
 .btn-loading {
@@ -785,13 +800,13 @@ nav {
     gap: 15px;
     padding: 25px;
     background: var(--or-carte);
-    border: 2px solid var(--or-bord);
-    border-radius: 15px;
+    border: 3px solid var(--texte-fonce);
+    border-radius: 0;
+    box-shadow: 6px 6px 0 var(--or-bord-fonce);
     text-align: left;
 }
 .blog-card:hover {
     background: var(--or-carte-survol);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 .blog-card h3 {
     font-size: 24px;
@@ -808,7 +823,7 @@ nav {
     color: var(--or);
     background: var(--violet);
     padding: 5px 12px;
-    border-radius: 15px;
+    border-radius: 0;
 }
 
 
@@ -858,9 +873,18 @@ p a { text-decoration: underline; text-underline-offset: 3px; }
 }
 .hero-cta a {
     padding: 12px 24px;
-    border-radius: 25px;
-    border: 2px solid var(--or);
+    border-radius: 0;
+    border: 3px solid var(--or);
+    box-shadow: 4px 4px 0 var(--or-bord-fonce);
     font-size: 18px;
+}
+.hero-cta a:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--or-bord-fonce);
+}
+.hero-cta a:active {
+    transform: translate(4px, 4px);
+    box-shadow: none;
 }
 .hero-cta a:first-child {
     background: var(--or);
@@ -880,7 +904,7 @@ p a { text-decoration: underline; text-underline-offset: 3px; }
         animation: none !important;
         transition: none !important;
     }
-    .fade-in, .slide-up, .scale-in, .stagger-item, .project-card {
+    .fade-in, .slide-up, .scale-in, .stagger-item {
         opacity: 1;
         transform: none;
     }
@@ -927,9 +951,9 @@ p a { text-decoration: underline; text-underline-offset: 3px; }
         background: rgba(27, 18, 41, 0.78);
         -webkit-backdrop-filter: blur(16px) saturate(140%);
         backdrop-filter: blur(16px) saturate(140%);
-        border: 1px solid rgba(235, 192, 106, 0.22);
-        border-radius: 999px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        border: 2px solid rgba(235, 192, 106, 0.45);
+        border-radius: 0;
+        box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
         z-index: 2000;
     }
     .nav-links li {
@@ -947,7 +971,7 @@ p a { text-decoration: underline; text-underline-offset: 3px; }
         box-sizing: border-box;
         justify-content: center;
         border: 0;
-        border-radius: 999px;
+        border-radius: 0;
         font-family: 'Pixelify Sans';
         font-size: 15px;
         text-transform: none;
@@ -1030,14 +1054,20 @@ p a { text-decoration: underline; text-underline-offset: 3px; }
     .about p {
         font-size: 17px;
     }
-    /* les paragraphes, puis les photos, puis la conclusion */
+    /* texte et photos alternés : paragraphe, photo, paragraphe, photo, paragraphe, conclusion */
+    .moi p:first-child { order: 1; }
+    .about-content img { order: 2; }
+    .moi p:nth-child(2) { order: 3; }
+    .about-content2 img { order: 4; }
+    .about-content2 p { order: 5; }
+    .about > p { order: 6; }
+    /* photos décalées d'un côté puis de l'autre */
     .about-content img, .about-content2 img {
-        order: 1;
-        width: 75%;
-        align-self: center;
+        width: 72%;
+        align-self: flex-end;
     }
-    .about > p {
-        order: 2;
+    .about-content2 img {
+        align-self: flex-start;
     }
     .home-content h1 {
         margin-top: 0; margin-bottom: 0; margin-left: 25px; margin-right: 25px;
@@ -1137,4 +1167,443 @@ p a { text-decoration: underline; text-underline-offset: 3px; }
     footer span:nth-child(2), footer span:nth-child(3), footer span:nth-child(4), footer span:nth-child(5), footer span:nth-child(6),footer span:nth-child(7) {
         display: none; /* caché en responsive */
     }
+}
+
+
+/* ---------- Rétro net : texture, séparateurs et détails pixel ---------- */
+
+::selection {
+    background: var(--or);
+    color: var(--texte-fonce);
+}
+
+/* Accueil : grille de pixels discrète qui s'efface vers les bords */
+.home {
+    background:
+        radial-gradient(ellipse at center, transparent 0, var(--violet-nuit) 70%),
+        conic-gradient(at 3px 3px, transparent 75%, rgba(235, 192, 106, 0.14) 0) 0 0 / 24px 24px;
+}
+.home-content img {
+    width: 260px;
+}
+.home-content h1 {
+    font-size: 64px;
+    line-height: 1.1;
+}
+.home-content h1 span {
+    font-size: 44px;
+}
+/* Curseur clignotant façon terminal */
+.home-content h1 span::after {
+    content: '_';
+    color: var(--or);
+    animation: curseur 1s steps(1) infinite;
+}
+@keyframes curseur {
+    50% { opacity: 0; }
+}
+.hero-tagline {
+    max-width: 34ch;
+    color: var(--violet-clair);
+}
+
+/* Titres de section encadrés de deux pixels */
+main > div > h2::before,
+main > div > h2::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    margin: 0 20px;
+    background: currentColor;
+    box-shadow: 4px 4px 0 var(--or-bord-fonce);
+}
+
+/* Séparateurs « créneaux » entre sections : la couleur de la section précédente descend en dents de pixel */
+.about, .portfolio, .contact, .blog {
+    position: relative;
+}
+.about::before, .portfolio::before, .contact::before, .blog::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 16px;
+    pointer-events: none;
+    background:
+        linear-gradient(var(--sep), var(--sep)) top / 100% 8px no-repeat,
+        linear-gradient(90deg, var(--sep) 50%, transparent 0) bottom left / 32px 8px repeat-x;
+}
+.about::before { --sep: var(--violet-nuit); }
+.portfolio::before { --sep: var(--violet); }
+.contact::before { --sep: var(--or-fond); }
+.blog::before { --sep: var(--violet); }
+
+/* À propos : colonne de texte limitée (~65 caractères) pour la lecture */
+.about {
+    grid-template-columns: minmax(0, 680px) 340px;
+    justify-content: center;
+}
+.about-content img,
+.about-content2 img {
+    box-sizing: border-box;
+    border: 3px solid var(--texte-fonce);
+    box-shadow: 6px 6px 0 var(--or);
+    --penche: 2deg; /* sens de l'inclinaison : d'un côté puis de l'autre */
+    /* garde aussi le fondu d'apparition de .scale-in (sinon la photo surgit d'un coup) */
+    transition: opacity 0.6s ease, transform 0.6s ease, rotate 0.2s steps(4), box-shadow 0.2s steps(4);
+}
+.about-content2 img {
+    --penche: -2deg;
+}
+/* Droites au repos ; elles se penchent au survol, comme une photo qu'on soulève */
+@media (hover: hover) {
+    .about-content img:hover,
+    .about-content2 img:hover {
+        rotate: var(--penche);
+        box-shadow: 9px 9px 0 var(--or);
+    }
+}
+/* Au défilement : la photo arrive penchée et se pose droite en atteignant le milieu de l'écran */
+@supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+        .about-content img,
+        .about-content2 img {
+            opacity: 1; /* l'apparition est gérée par le défilement, plus par .scale-in */
+            animation: photo-posee ease-out both;
+            animation-timeline: view();
+            animation-range: entry 0% cover 45%;
+        }
+    }
+}
+@keyframes photo-posee {
+    from { opacity: 0; transform: translateY(40px) scale(0.94) rotate(calc(var(--penche) * 3)); }
+    40% { opacity: 1; }
+    to { opacity: 1; transform: none; }
+}
+.about > p {
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* Bouton Blog du menu */
+.nav-links .nav-cta-button {
+    box-shadow: 3px 3px 0 var(--or-bord-fonce);
+}
+
+/* Écrans tactiles : pas de survol, le lien du projet reste visible en bas de l'image */
+@media (hover: none) {
+    .project-overlay {
+        opacity: 1;
+        align-items: flex-end;
+        padding-bottom: 14px;
+        background: linear-gradient(transparent 40%, rgba(0, 0, 0, 0.55));
+    }
+}
+
+@media (max-width: 768px) {
+    .home-content img {
+        width: 140px;
+    }
+    .home-content h1 {
+        font-size: 40px;
+    }
+    .home-content h1 span {
+        font-size: 32px;
+    }
+    .hero-tagline {
+        font-size: 17px;
+        padding: 0 25px;
+    }
+    main > div > h2::before,
+    main > div > h2::after {
+        width: 8px;
+        height: 8px;
+        margin: 0 12px;
+    }
+    .nav-links .nav-cta-button {
+        box-shadow: none;
+    }
+    .about-content img,
+    .about-content2 img {
+        box-shadow: 4px 4px 0 var(--or);
+    }
+}
+
+
+/* ---------- Variante C : rétro poussé (écran CRT) ---------- */
+/* Lignes de balayage sur toute la page */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+    pointer-events: none;
+    background: repeating-linear-gradient(rgba(0, 0, 0, 0.16) 0 1px, transparent 1px 3px);
+}
+/* Halo lumineux des titres, comme un tube cathodique */
+h1, .home-content h1 span, .contact-info h3 {
+    text-shadow: 0 0 6px rgba(235, 192, 106, 0.55), 3px 3px 0 var(--or-bord-fonce);
+}
+main > div > h2 {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+}
+/* Accueil : écran bombé et allumage */
+.home {
+    background:
+        radial-gradient(ellipse at center, rgba(235, 192, 106, 0.06) 0, transparent 55%),
+        var(--violet-nuit);
+}
+.home-content {
+    animation: allumage 0.9s steps(6) both;
+}
+@keyframes allumage {
+    0% { opacity: 0; transform: scaleY(0.02); filter: brightness(3); }
+    40% { opacity: 1; transform: scaleY(0.02); }
+    100% { transform: none; filter: none; }
+}
+/* Bouton principal façon « PRESS START » */
+.hero-cta a:first-child::before {
+    content: '▶ ';
+    animation: curseur 1s steps(1) infinite;
+}
+/* Cartes en trame tramée (dithering) */
+.project-card, .blog-card {
+    background-image: conic-gradient(at 2px 2px, transparent 75%, rgba(148, 105, 31, 0.12) 0);
+    background-size: 4px 4px;
+}
+.portfolio {
+    background-image: conic-gradient(at 4px 4px, transparent 75%, rgba(148, 105, 31, 0.18) 0);
+    background-size: 16px 16px;
+}
+/* Curseur de souris pixel */
+html {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' shape-rendering='crispEdges'%3E%3Cpath d='M2 2h2v2h2v2h2v2h2v2h2v2h2v2h-4v2h2v2h2v2h-2v2h-2v-2h-2v-2H8v2H6v2H2z' fill='%23EBC06A' stroke='%231E1A24' stroke-width='1'/%3E%3C/svg%3E") 2 2, auto;
+}
+
+
+/* ---------- Mode jeu : écran titre, niveaux, HUD et effets ---------- */
+
+h1, h2, h3 { text-wrap: balance; }
+.project-info p, .blog-card p, .hero-tagline { text-wrap: pretty; }
+
+/* Apparitions au défilement saccadées, comme une animation en sprites */
+.fade-in, .slide-up, .scale-in, .stagger-item {
+    transition-timing-function: steps(6, end);
+}
+
+/* Accueil = écran titre */
+.home {
+    position: relative;
+    overflow: hidden;
+}
+.hero-fx {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* la trame s'estompe vers les bords de l'écran */
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 85%);
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 85%);
+}
+.home-content {
+    position: relative; /* au-dessus du champ d'étoiles */
+}
+/* Logo qui flotte, et fait un tour au survol */
+.home-content img.visible {
+    animation: flotte 3s steps(6) 1s infinite;
+}
+.home-content img.visible:hover {
+    animation: tourne 0.8s steps(8);
+}
+@keyframes flotte {
+    50% { transform: translateY(-12px); }
+}
+@keyframes tourne {
+    to { transform: rotate(360deg); }
+}
+/* Ligne de terminal tapée */
+.hero-term {
+    font-size: 18px;
+    color: white;
+    min-height: 1.75em; /* rien ne bouge pendant la frappe */
+}
+.hero-prompt {
+    color: #7FE0A8;
+}
+.hero-term .typed::after {
+    content: '';
+    display: inline-block;
+    width: 0.6em;
+    height: 1.1em;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    background: var(--or);
+    animation: curseur 1s steps(1) infinite;
+}
+/* « Appuyez sur Start » qui clignote en bas de l'écran titre */
+.press-start {
+    position: absolute;
+    left: 50%;
+    bottom: 32px;
+    transform: translateX(-50%);
+    font-family: 'Bitcount';
+    font-size: 18px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--or);
+    animation: curseur 1.2s steps(1) 5; /* clignote quelques secondes puis reste affiché */
+}
+.press-start::after {
+    content: ' ▼';
+}
+.press-start:hover,
+.press-start:focus-visible {
+    animation: none;
+    color: white;
+}
+
+/* Chaque section est un niveau : « NIVEAU 1 » au-dessus du titre */
+main { counter-reset: niveau; }
+.about, .portfolio, .contact, .blog { counter-increment: niveau; }
+.about::after, .portfolio::after, .contact::after, .blog::after {
+    content: '— Niveau ' counter(niveau) ' —';
+    position: absolute;
+    top: 44px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: 'Pixelify Sans';
+    font-size: 15px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--or);
+    pointer-events: none;
+}
+.portfolio::after { color: var(--texte-fonce); }
+
+/* Titres de section : petit « glitch » à l'apparition et au survol */
+main > div > h2.visible {
+    animation: glitch 0.6s steps(2) 0.2s;
+}
+main > div > h2:hover {
+    animation: glitch 0.4s steps(2) infinite;
+}
+@keyframes glitch {
+    0%   { text-shadow: 3px 0 #FF6AD5, -3px 0 #4FC3FF; transform: translateX(0); }
+    25%  { text-shadow: -3px 0 #FF6AD5, 3px 0 #4FC3FF; transform: translateX(-3px); }
+    50%  { text-shadow: 2px 2px #FF6AD5, -2px -2px #4FC3FF; transform: translateX(3px); }
+    75%  { text-shadow: -2px 0 #FF6AD5, 2px 0 #4FC3FF; transform: translateX(0); }
+    100% { text-shadow: 0 0 8px rgba(255, 255, 255, 0.35); }
+}
+
+/* Cartes : inclinaison 3D + reflet (variables posées par fx.js) */
+.project-card, .blog-card {
+    position: relative;
+}
+.project-card:hover,
+.blog-card:hover {
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translate(-4px, -4px);
+    transition: transform 0.08s linear, box-shadow 0.2s steps(2), background-color 0.3s ease;
+}
+.project-card::after, .blog-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.45), transparent 45%);
+    mix-blend-mode: soft-light;
+    transition: opacity 0.2s ease;
+}
+.project-card:hover::after, .blog-card:hover::after {
+    opacity: 1;
+}
+
+/* Blog : le badge « Bientôt » clignote trois fois */
+.blog-date {
+    animation: curseur 1s steps(1) 3;
+}
+
+/* HUD : barre d'expérience sous le menu */
+.hud {
+    position: fixed;
+    top: var(--header-h);
+    right: 16px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 10px;
+    font-family: 'Pixelify Sans';
+    font-size: 13px;
+    color: var(--or);
+    background: rgba(27, 18, 41, 0.9);
+    border: 2px solid var(--or-bord-fonce);
+    border-top: 0;
+    font-variant-numeric: tabular-nums;
+    transition: opacity 0.2s steps(3), visibility 0.2s;
+}
+.hud-cache {
+    opacity: 0;
+    visibility: hidden;
+}
+.hud-niv {
+    min-width: 6ch;
+    color: white;
+}
+.hud-barre {
+    width: 120px;
+    height: 10px;
+    border: 2px solid var(--or);
+    padding: 1px;
+}
+.hud-barre span {
+    display: block;
+    height: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    /* barre découpée en blocs, comme une jauge de vie */
+    background: repeating-linear-gradient(90deg, var(--or) 0 8px, transparent 8px 10px);
+}
+
+/* Clic : éclats de pixels (créés par fx.js) */
+.px-eclat {
+    position: fixed;
+    z-index: 6000;
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    pointer-events: none;
+    animation: eclat 0.45s steps(5) forwards;
+}
+@keyframes eclat {
+    to { transform: translate(var(--dx), var(--dy)); opacity: 0; }
+}
+
+/* Pied de page : « Continuer ? » pour remonter */
+.continuer {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-family: 'Bitcount';
+    font-size: 18px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+.continuer::before {
+    content: '▲ ';
+}
+
+/* Code Konami : mode arcade (couleurs inversées façon néon) */
+html.arcade main,
+html.arcade footer {
+    filter: hue-rotate(160deg) saturate(1.5);
+}
+
+@media (max-width: 768px) {
+    .hero-term { font-size: 15px; }
+    .press-start { display: none; } /* la barre de navigation du bas joue déjà ce rôle */
+    .about::after, .portfolio::after, .contact::after, .blog::after { top: 26px; font-size: 12px; }
+    .hud { right: 8px; font-size: 11px; gap: 6px; padding: 4px 8px; }
+    .hud-barre { width: 70px; }
 }

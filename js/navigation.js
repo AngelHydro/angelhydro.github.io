@@ -93,7 +93,7 @@ filterButtons.forEach(button => {
 
             if (filter === 'all' || category === filter) {
                 card.style.display = '';
-                card.style.animation = 'fadeInUp 0.6s ease forwards';
+                card.style.animation = 'fadeInUp 0.6s ease backwards';
             } else {
                 card.style.display = 'none';
             }
